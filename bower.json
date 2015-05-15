@@ -1,0 +1,25 @@
+{
+  "name": "now-tdrexplorer.com",
+  "version": "1.0.0",
+  "authors": [
+    "Chris Nilghe"
+  ],
+  "description": "Now at Tokyo Disney Resort",
+  "main": "index.js",
+  "keywords": [
+    "tdr"
+  ],
+  "license": "MIT",
+  "homepage": "now.tdrexplorer.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bower-foundation": "~4.0.0",
+    "jquery": "~2.1.4"
+  }
+}
