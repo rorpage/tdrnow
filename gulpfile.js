@@ -49,7 +49,7 @@ var bowerCss = [
 var bowerCssIndependent = [''];
 
 var reactApps = [
-    'FrontPage.js'
+    'LandingPage.js'
 ];
 
 gulp.task('default', ['clean'], function() {

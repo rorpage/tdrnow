@@ -11,7 +11,7 @@ function setIsLoading(state){
     _isLoading = state;
 }
 
-var FrontPageStore = assign(EventEmitter.prototype, {
+var ParkStore = assign(EventEmitter.prototype, {
 
     isLoading: function() {
         return _isLoading;
@@ -41,8 +41,8 @@ Dispatcher.register(function(payload) {
             return true;
     }
 
-    FrontPageStore.emitChange();
+    ParkStore.emitChange();
     return true;
 });
 
-module.exports = FrontPageStore;
+module.exports = ParkStore;
