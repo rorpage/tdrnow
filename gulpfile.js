@@ -12,7 +12,10 @@ var gulp                = require('gulp'),
     plugins.concat      = require('gulp-concat'), 
     plugins.del         = require('del'),
     plugins.handlebars  = require('gulp-compile-handlebars'),
-    plugins.minifyCss   = require('gulp-minify-css');
+    plugins.minifyCss   = require('gulp-minify-css'),
+    plugins.browserify  = require('browserify'),
+    plugins.reactify    = require('reactify'),
+    plugins.source      = require('vinyl-source-stream');
 
 var paths = {
     bower: './bower_components/',
@@ -24,7 +27,7 @@ var paths = {
     js: {
         base: 'src/js/',
         vendor: 'src/js/vendor/',
-        react: 'src/js/react/',
+        react: 'src/js/react/ui/',
         dist: 'dist/js/',
     }
 }
@@ -45,8 +48,12 @@ var bowerCss = [
 
 var bowerCssIndependent = [''];
 
+var reactApps = [
+    'FrontPage.js'
+];
+
 gulp.task('default', ['clean'], function() {
-    gulp.start('sass', 'scripts', 'handlebars');
+    gulp.start('sass', 'scripts', 'handlebars', 'browserify-react');
 });
 
 /**
@@ -106,6 +113,27 @@ gulp.task('handlebars', function(cb){
 });
 
 /**
+ * Compile React Components
+ */
+gulp.task('browserify-react', browserify);
+
+function browserify() {
+    var file = reactApps.shift();
+    var b = plugins.browserify();
+
+    b.transform(plugins.reactify);
+    b.add(paths.js.react + file);
+
+    b.bundle()
+     .pipe(plugins.source(file))
+     .pipe(gulp.dest(paths.js.dist + 'react/'));
+
+    if (reactApps.length > 0) {
+        browserify();
+    }
+}
+
+/**
  * Clean the dist/ folder before writing anything to it. Clear out any left behind files
  */
 gulp.task('clean', function(cb) {
@@ -115,7 +143,6 @@ gulp.task('clean', function(cb) {
 /**
  * Helper Functions
  */
-
 function copyBowerAssets(bowerPackages, destination) {
     var file = bowerPackages.shift();
     gulp.src(file)

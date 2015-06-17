@@ -4,14 +4,14 @@ var FrontPageActions		= require('../actions/front-page-actions.js');
 
 function getFrontPageState(){
 	return {
-		isLoading = FrontPageStore.isLoading()
-	}
+		isLoading: FrontPageStore.isLoading()
+	};
 }
 
 var FrontPage = React.createClass({
 	
 	getInitialState: function() {
-		return getFrontPageState():
+		return getFrontPageState();
 	},
 
 	componentDidMount: function() {
