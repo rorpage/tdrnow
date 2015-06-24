@@ -19,7 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "bower-foundation": "~4.0.0",
+    "foundation": "~5.5.2",
     "jquery": "~2.1.4"
   }
 }

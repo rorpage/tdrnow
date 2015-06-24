@@ -34,19 +34,12 @@ var paths = {
 
 var bowerJs = [
     paths.bower + 'jquery/dist/jquery.min.js',
-    paths.bower + 'bower-foundation/js/foundation.min.js'
+    paths.bower + 'foundation/js/foundation.min.js'
 ];
 
 var bowerJsIndependent = [
     paths.bower + 'modernizr/modernizr.js'
 ];
-
-var bowerCss = [
-    paths.bower + 'normalize-css/normalize.css',
-    paths.bower + 'bower-foundation/css/foundation.css'
-];
-
-var bowerCssIndependent = [''];
 
 var reactApps = [
     'landing-page.js'
@@ -59,22 +52,11 @@ gulp.task('default', ['clean'], function() {
 /**
  * Compile and minify all SASS files 
  */
-gulp.task('sass', ['concat-bower-css'], function() {
+gulp.task('sass', function() {
     return plugins.sass(paths.css.base + '_styles.scss', { style: 'compressed', sourcemap: true })
             .pipe(plugins.rename('styles.css'))
             .pipe(plugins.rename({ suffix: '.min' }))
             .pipe(gulp.dest(paths.css.dist));
-});
-
-gulp.task('concat-bower-css', function(){
-    return gulp.src(bowerCss)
-           .pipe(plugins.concat('vendor.min.css'))
-           .pipe(plugins.minifyCss())
-           .pipe(gulp.dest(paths.css.dist + '/vendor'));
-});
-
-gulp.task('copy-all-bower-css', function(){
-    copyBowerAssets(bowerCssIndependent, paths.css.dist + 'vendor/');
 });
 
 /**
