@@ -1,7 +1,7 @@
 var indexOutput     = 'index.html',
     tdsOutput       = 'tds.html',
     tdlOutput       = 'tdl.html',
-    staticFolders   = ['src/img/*'],
+    staticFolders   = ['src/img/*', 'src/fonts/*'],
     assestFolders   = ['src/js/vendor/'];
 
 var gulp                = require('gulp'),
@@ -46,7 +46,7 @@ var reactApps = [
 ];
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('sass', 'scripts', 'handlebars', 'browserify-react');
+    gulp.start('sass', 'scripts', 'handlebars', 'browserify-react', 'copy-static-assets');
 });
 
 /**
@@ -114,6 +114,11 @@ function browserify() {
         browserify();
     }
 }
+
+gulp.task('copy-static-assets', function(){
+    return gulp.src(staticFolders, { base: './src/' })
+                .pipe(gulp.dest('dist/'));
+});
 
 /**
  * Clean the dist/ folder before writing anything to it. Clear out any left behind files

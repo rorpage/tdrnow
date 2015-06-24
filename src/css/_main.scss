@@ -1,6 +1,32 @@
+header,
+main,
+footer {
+  width: 100%;
+}
 
+.inner {
+  margin: 0 auto;
+  padding: 0 1em;
+  width: 980px;
+}
 
-.main {
+header {
+  background: url('../img/hero.jpg');
+  background-size: cover;
+  min-height: 600px;
+}
+
+main {
   margin: 0 auto;
   width: 100%;
+}
+
+footer {
+  .fa-heart {
+    color: $heart-icon;
+  }
+
+  .fa-magic {
+    color: $wand-icon;
+  }
 }

@@ -1,12 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Nunito:400,300);
 
-// Bower Components
-@import '../../bower_components/foundation/scss/normalize';
-@import '../../bower_components/foundation/scss/foundation';
-
-// Manually Downloaded Styles
+// Vendor Components
+@import 'vendor/normalize';
+@import 'vendor/foundation';
 @import 'vendor/html5boilerplate';
+@import 'vendor/fontawesome/font-awesome';
 
 // Custom Styles
+@import 'variables';
 @import 'font';
 @import 'main';
