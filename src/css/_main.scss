@@ -13,7 +13,15 @@ footer {
 header {
   background: url('../img/hero.jpg');
   background-size: cover;
-  min-height: 600px;
+  background-attachment: fixed;
+  min-height: 500px;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #fff;
+  }
 }
 
 main {
