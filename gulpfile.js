@@ -46,8 +46,24 @@ var reactApps = [
     'landing-page.js'
 ];
 
+var dependencies = [
+    'react'
+];
+
 gulp.task('default', ['clean'], function() {
     gulp.start('sass', 'scripts', 'handlebars', 'browserify-react-single', 'copy-static-assets');
+});
+
+/**
+ * Bundle all vendor dependencies into a single file
+ */
+gulp.task('browserify-vendor', function(){
+    return plugins.browserify()
+        .require(dependencies)
+        .bundle()
+        .pipe(plugins.source('vendor.js'))
+        .pipe(plugins.streamify(plugins.uglify({mangle:false})))
+        .pipe(gulp.dest(paths.js.dist))
 });
 
 /**
