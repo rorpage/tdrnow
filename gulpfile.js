@@ -17,6 +17,7 @@ var plugins             = require('gulp-load-plugins')();
     plugins.reactify    = require('reactify');
     plugins.source      = require('vinyl-source-stream');
     plugins.streamify   = require('gulp-streamify');
+    plugins.babelify    = require('babelify');
 
 var paths = {
     bower: './bower_components/',
@@ -50,8 +51,10 @@ var dependencies = [
     'react'
 ];
 
+var mainAppFile = 'app.js';
+
 gulp.task('default', ['clean'], function() {
-    gulp.start('sass', 'scripts', 'handlebars', 'browserify-react-single', 'copy-static-assets');
+    gulp.start('sass', 'scripts', 'handlebars', 'browserify', 'copy-static-assets');
 });
 
 /**
@@ -62,9 +65,23 @@ gulp.task('browserify-vendor', function(){
         .require(dependencies)
         .bundle()
         .pipe(plugins.source('vendor.js'))
-        .pipe(plugins.streamify(plugins.uglify({mangle:false})))
+        .pipe(plugins.streamify(plugins.uglify({ mangle:false })))
         .pipe(gulp.dest(paths.js.dist))
 });
+
+/**
+ * Bundle all browerify required files
+ */
+gulp.task('browserify', ['browserify-vendor'], function() {
+  return plugins.browserify(paths.js.base + mainAppFile)
+    .external(dependencies)
+    .transform(plugins.babelify)
+    .bundle()
+    .pipe(plugins.source('app.js'))
+    .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+    .pipe(gulp.dest(paths.js.dist))
+});
+
 
 /**
  * Compile and minify all SASS files 
@@ -81,8 +98,8 @@ gulp.task('sass', function() {
  * TODO: merge this with browserify-react-single to have one app.js file
  */
 gulp.task('scripts', ['concat-bower-js', 'copy-bower-js'], function(){
-    return gulp.src('src/js/*.js')
-        .pipe(plugins.concat('app.js'))
+    return gulp.src(['src/js/*.js', '!src/js/app.js'])
+        .pipe(plugins.concat('scripts.js'))
         .pipe(plugins.rename({ suffix: '.min' }))
         .pipe(plugins.uglify())
         .pipe(gulp.dest(paths.js.dist))
@@ -117,56 +134,6 @@ gulp.task('handlebars', function(cb){
             .pipe(plugins.rename(indexOutput))
             .pipe(gulp.dest('dist'));
 });
-
-/**
- * Compile React Components
- * TODO: Depricated but left here for reference
- */
-// gulp.task('browserify-react', browserify);
-gulp.task('browserify-react-single', browserifySingle);
-
-// function browserify() {
-//     var file = reactApps.shift();
-//     var b = plugins.browserify();
-
-//     b.transform(plugins.reactify);
-//     b.add(paths.js.react + file);
-
-//     b.bundle()
-//      .pipe(plugins.source(file))
-//      .pipe(plugins.streamify(plugins.uglify())) // convert the buffer to a stream
-//      .pipe(gulp.dest(paths.js.dist + 'react/'));
-
-//     if (reactApps.length > 0) {
-//         browserify();
-//     }
-// }
-
-function browserifySingle() {
-    var file = 'app.js';
-    var b = plugins.browserify();
-
-    b.transform(plugins.reactify);
-    b.add(paths.js.base + file);
-
-    b.bundle()
-     .pipe(plugins.source(file))
-     .pipe(plugins.streamify(plugins.uglify())) // convert the buffer to a stream
-     .pipe(gulp.dest(paths.js.dist));
-}
-
-// TODO: This does not work for some reason
-// gulp.task('bundle-js', function(){
-//     return gulp.src('src/js/app.js')
-//         .pipe(plugins.browserify({
-//             transform: [plugins.reactify]
-//         }))
-//         .on('error', function(err) {
-//             console.log('Error: ', err.message);
-//         })
-//         .pipe(plugins.rename({ suffix: '.min' }))
-//         .pipe(gulp.dest(paths.js.dist))
-// });
 
 gulp.task('copy-static-assets', function(){
     return gulp.src(staticFolders, { base: './src/' })
