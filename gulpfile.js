@@ -18,6 +18,8 @@ var plugins             = require('gulp-load-plugins')();
     plugins.source      = require('vinyl-source-stream');
     plugins.streamify   = require('gulp-streamify');
     plugins.babelify    = require('babelify');
+    plugins.watchify    = require('watchify');
+    plugins.gutil       = require('gulp-util');
 
 var paths = {
     bower: './bower_components/',
@@ -30,9 +32,12 @@ var paths = {
         base: 'src/js/',
         vendor: 'src/js/vendor/',
         react: 'src/js/react/ui/',
-        dist: 'dist/js/',
+        dist: 'dist/js/'
+    },
+    cache: {
+        base: '.gulp-cache/'
     }
-}
+};
 
 var bowerJs = [
     paths.bower + 'jquery/dist/jquery.min.js',
@@ -53,72 +58,68 @@ var dependencies = [
 
 var mainAppFile = 'app.js';
 
-gulp.task('default', ['clean'], function() {
-    gulp.start('sass', 'scripts', 'handlebars', 'browserify', 'copy-static-assets');
+gulp.task('default', ['build', 'watch', 'browserify-watch']);
+
+gulp.task('build', ['clean'], function() {
+    gulp.start(
+        'sass',
+        'plugins',
+        'handlebars',
+        'browserify',
+        'concat-vendor',
+        'copy-static-assets'
+    );
 });
 
 /**
- * Bundle all vendor dependencies into a single file
+ * Watch tasks for sass and browserify
  */
-gulp.task('browserify-vendor', function(){
-    return plugins.browserify()
-        .require(dependencies)
-        .bundle()
-        .pipe(plugins.source('vendor.js'))
-        .pipe(plugins.streamify(plugins.uglify({ mangle:false })))
-        .pipe(gulp.dest(paths.js.dist))
+gulp.task('watch', function(){
+    gulp.watch(paths.css.base + '**/*', ['sass']);
 });
 
-/**
- * Bundle all browerify required files
- */
-gulp.task('browserify', ['browserify-vendor'], function() {
-  return plugins.browserify(paths.js.base + mainAppFile)
-    .external(dependencies)
-    .transform(plugins.babelify)
-    .bundle()
-    .pipe(plugins.source('app.js'))
-    .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
-    .pipe(gulp.dest(paths.js.dist))
-});
+gulp.task('browserify-watch', function(){
+    var bundler = plugins.watchify(plugins.browserify(paths.js.base + mainAppFile));
+    bundler.external(dependencies);
+    bundler.transform(plugins.babelify)
+    bundler.on('update', rebundle);
+    return rebundle();
 
+    function rebundle() {
+        var start = Date.now();
+        return bundler.bundle()
+            .on('error', function(err) {
+                plugins.gutil.log(plugins.gutil.colors.red(err.toString()));
+            })
+            .on('end', function(){
+                plugins.gutil.log(plugins.gutil.colors.green('Finished rebundling in', (Date.now() - start + 'ms')));
+            })
+            .pipe(plugins.source(mainAppFile))
+            .pipe(plugins.rename({ suffix: '.min' }))
+            .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+            .pipe(gulp.dest(paths.js.dist));
+    }
+});
 
 /**
  * Compile and minify all SASS files 
  */
 gulp.task('sass', function() {
     return plugins.sass(paths.css.base + '_styles.scss', { style: 'compressed', sourcemap: true })
-            .pipe(plugins.rename('styles.css'))
-            .pipe(plugins.rename({ suffix: '.min' }))
-            .pipe(gulp.dest(paths.css.dist));
+           .pipe(plugins.rename('styles.css'))
+           .pipe(plugins.rename({ suffix: '.min' }))
+           .pipe(gulp.dest(paths.css.dist));
 });
 
 /**
  * Concat and minify all application js files
- * TODO: merge this with browserify-react-single to have one app.js file
  */
-gulp.task('scripts', ['concat-bower-js', 'copy-bower-js'], function(){
+gulp.task('plugins', function(){
     return gulp.src(['src/js/*.js', '!src/js/app.js'])
-        .pipe(plugins.concat('scripts.js'))
-        .pipe(plugins.rename({ suffix: '.min' }))
-        .pipe(plugins.uglify())
-        .pipe(gulp.dest(paths.js.dist))
-});
-
-/**
- * Concat all the js dependencies from bower
- */
-gulp.task('concat-bower-js', function(){
-    return gulp.src(bowerJs)
-        .pipe(plugins.concat('vendor.min.js'))
-        .pipe(gulp.dest(paths.js.dist + '/vendor'));
-});
-
-/**
- * Simply copy bower dependencies that cannot be bundled together
- */
-gulp.task('copy-bower-js', function(){
-    copyBowerAssets(bowerJsIndependent, paths.js.dist + 'vendor/');
+           .pipe(plugins.concat('scripts.js'))
+           .pipe(plugins.rename({ suffix: '.min' }))
+           .pipe(plugins.uglify())
+           .pipe(gulp.dest(paths.js.dist))
 });
 
 /**
@@ -135,9 +136,68 @@ gulp.task('handlebars', function(cb){
             .pipe(gulp.dest('dist'));
 });
 
+/**
+ * Bundle all browerify required files into the app file
+ */
+gulp.task('browserify', function() {
+  return plugins.browserify(paths.js.base + mainAppFile)
+         .external(dependencies)
+         .transform(plugins.babelify)
+         .bundle()
+         .pipe(plugins.source(mainAppFile))
+         .pipe(plugins.rename({ suffix: '.min' }))
+         .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+         .pipe(gulp.dest(paths.js.dist))
+});
+
+/**
+ * Concat all vendor files by compiling the browserify and bower vendor files
+ * and copying them into a temp folder. Once they are compiled then concat them together.
+ */
+gulp.task('concat-vendor', ['browserify-vendor', 'bower-vendor', 'copy-bower-static'], function(){
+    return gulp.src([paths.cache.base + '*.js'])
+           .pipe(plugins.concat('vendor.js'))
+           .pipe(plugins.rename({ suffix: '.min'}))
+           .pipe(gulp.dest(paths.js.dist))
+});
+
+
+/**
+ * Bundle all vendor dependencies into a single file
+ */
+gulp.task('browserify-vendor', function(){
+    return plugins.browserify()
+           .require(dependencies)
+           .bundle()
+           .pipe(plugins.source('browserify-vendor.js'))
+           .pipe(plugins.streamify(plugins.uglify({ mangle:false })))
+           .pipe(gulp.dest(paths.cache.base))
+});
+
+
+/**
+ * Concat all the js dependencies from bower
+ */
+gulp.task('bower-vendor', function(){
+    return gulp.src(bowerJs)
+           .pipe(plugins.concat('bower-vendor.js'))
+           .pipe(gulp.dest(paths.cache.base));
+});
+
+/**
+ * Simply copy bower dependencies that cannot be bundled together
+ * ex: Mondernizr
+ */
+gulp.task('copy-bower-static', function(){
+    copyBowerAssets(bowerJsIndependent, paths.js.dist + 'vendor/');
+});
+
+/**
+ * Copy over all the static assests such as images and fonts
+ */
 gulp.task('copy-static-assets', function(){
     return gulp.src(staticFolders, { base: './src/' })
-            .pipe(gulp.dest('dist/'));
+           .pipe(gulp.dest('dist/'));
 });
 
 /**
@@ -145,6 +205,13 @@ gulp.task('copy-static-assets', function(){
  */
 gulp.task('clean', function(cb) {
     plugins.del(['dist'], cb)
+});
+
+/**
+ * Clean up the temp/ folder
+ */
+gulp.task('delete-temp', function(cb) {
+    plugins.del([paths.temp.base], cb);
 });
 
 /**

@@ -10,6 +10,9 @@ bower_components
 .sass-cache
 *.css.map
 
+### Gulp ###
+.gulp-cache
+
 ### Node ###
 # Logs
 logs
