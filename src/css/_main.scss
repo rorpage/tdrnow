@@ -6,21 +6,22 @@ footer {
 
 .inner {
   margin: 0 auto;
+  max-width: 980px;
   padding: 0 1em;
-  width: 980px;
+  width: 100%;
 }
 
 header {
   background: url('../img/hero.jpg');
-  background-size: cover;
   background-attachment: fixed;
-  min-height: 500px;
+  background-size: cover;
+  height: 30vh;
 
   h1,
   h2,
   h3,
   h4 {
-    color: #fff;
+    color: $font-default;
   }
 }
 
