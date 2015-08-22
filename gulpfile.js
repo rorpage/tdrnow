@@ -20,6 +20,7 @@ var plugins             = require('gulp-load-plugins')();
     plugins.babelify    = require('babelify');
     plugins.watchify    = require('watchify');
     plugins.gutil       = require('gulp-util');
+    plugins.server      = require('gulp-server-livereload');
 
 var paths = {
     bower: './bower_components/',
@@ -58,6 +59,9 @@ var dependencies = [
 
 var mainAppFile = 'app.js';
 
+/**
+ * Builds
+ */
 gulp.task('default', ['build', 'watch', 'browserify-watch']);
 
 gulp.task('build', ['clean'], function() {
@@ -212,6 +216,18 @@ gulp.task('clean', function(cb) {
  */
 gulp.task('delete-temp', function(cb) {
     plugins.del([paths.temp.base], cb);
+});
+
+/**
+ * Live Reload Server
+ */
+gulp.task('webserver', function(){
+    gulp.src('dist/')
+        .pipe(plugins.server({
+            livereload: true,
+            // directoryListing: true,
+            open: true
+        }));
 });
 
 /**
