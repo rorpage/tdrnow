@@ -150,7 +150,7 @@ gulp.task('browserify', function() {
          .bundle()
          .pipe(plugins.source(mainAppFile))
          .pipe(plugins.rename({ suffix: '.min' }))
-         .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+         // .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
          .pipe(gulp.dest(paths.js.dist))
 });
 
