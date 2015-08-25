@@ -39,4 +39,4 @@ var Weather = React.createClass({
 	}
 });
 
-module.exports = Hours;
+module.exports = Weather;
