@@ -10,6 +10,10 @@ class ResortActions {
         this.dispatch(weather);
     }
 
+    updateDisneylandWait(disneyland) {
+        this.dispatch(disneyland);
+    }
+
     fetchHours() {
         this.dispatch();
         Api.fetchHours()
@@ -32,12 +36,31 @@ class ResortActions {
             });
     }
 
+    fetchDisneylandWait(opts, id) {
+        this.dispatch();
+        Api.fetchWait(opts, id)
+            .done((wait) => {
+                console.log('fetch succeeded2');
+                this.actions.updateDisneylandWait(wait);
+                console.log('fetch succeeded');
+            })
+            .error((errorMessage) => {
+                this.actions.disneylandWaitFailed(errorMessage);
+                console.log('fetch failed');
+                console.log(errorMessage);
+            })
+    }
+
     hoursFailed(errorMessage) {
         this.dispatch(errorMessage);
     }
 
     weatherFailed(errorMessage) {
-        this.dispatch(weatherErrorMessage);
+        this.dispatch(errorMessage);
+    }
+
+    disneylandWaitFailed(errorMessage) {
+        this.dispatch(errorMessage);
     }
 }
 

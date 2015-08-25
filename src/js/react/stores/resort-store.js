@@ -3,23 +3,29 @@ var ResortActions = require('../actions/resort-actions');
 
 class ResortStore {
     constructor() {
-        this.hours = {};
+        this.hours = [];
         this.weather = {};
+        this.disneylandWait = {};
         this.errorMessage = null;
         this.weatherErrorMessage = null;
+        this.disneylandWaitErrorMessage = null;
 
         this.bindListeners({
             handleUpdateHours: ResortActions.UPDATE_HOURS,
             handleUpdateWeather: ResortActions.UPDATE_WEATHER,
+            handleUpdateDisneylandWait: ResortActions.UPDATE_DISNEYLAND_WAIT,
             handleFetchHours: ResortActions.FETCH_HOURS,
             handleFetchWeather: ResortActions.FETCH_WEATHER,
+            handleFetchDisneylandWait: ResortActions.FETCH_DISNEYLAND_WAIT,
             handleHoursFailed: ResortActions.HOURS_FAILED,
-            handleWeatherFailed: ResortActions.WEATHER_FAILED
+            handleWeatherFailed: ResortActions.WEATHER_FAILED,
+            handleDisneylandWaitFailed: ResortActions.DISNEYLAND_WAIT_FAILED
         });
     }
 
     handleUpdateHours(hours) {
-        this.hours = hours;
+        this.hours.push(hours.Tds);
+        this.hours.push(hours.Tdl);
         this.errorMessage = null;
     }
 
@@ -28,25 +34,32 @@ class ResortStore {
         this.weatherErrorMessage = null;
     }
 
+    handleUpdateDisneylandWait(disneylandWait) {
+        this.disneylandWait = disneylandWait;
+    }
+
     handleFetchHours() {
-        /** 
-         * TODO: Do not care for this but it is from the tutorial. Rework later.
-         * reset the array while we're fetching new locations so React can
-         * be smart and render a spinner for us since the data is empty.
-         */
-        this.hours = {};
+        this.hours = [];
     }
 
     handleFetchWeather() {
         this.weather = {};
     }
 
+    handleFetchDisneylandWait() {
+        this.disneylandWait = {};
+    }
+
     handleHoursFailed(errorMessage) {
         this.errorMessage = errorMessage;
     }
 
-    handleWeatherFailed(weatherErrorMessage) {
-        this.weatherErrorMessage = weatherErrorMessage;
+    handleWeatherFailed(errorMessage) {
+        this.weatherErrorMessage = errorMessage;
+    }
+
+    handleDisneylandWaitFailed(errorMessage) {
+        this.disneylandWaitErrorMessage = errorMessage;
     }
 }
 
