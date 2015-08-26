@@ -26,8 +26,14 @@ var DisneylandWait = React.createClass({
         var error = null;
         if (this.state.disneylandWaitErrorMessage) {
             error = <Error message={this.state.disneylandWaitErrorMessage} />
-            console.log('there was an error');
+            console.log('Fetching Tokyo Disneyland Wait Times threw an error');
             console.log(this.state.disneylandWaitErrorMessage);
+        }
+
+        if ($.isEmptyObject(this.state.disneylandWait)) {
+            return (
+                <h4>Loading...</h4>
+            );
         }
 
         return (

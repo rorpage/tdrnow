@@ -40,15 +40,16 @@ class ResortActions {
         this.dispatch();
         Api.fetchWait(opts, id)
             .done((wait) => {
-                console.log('fetch succeeded2');
                 this.actions.updateDisneylandWait(wait);
-                console.log('fetch succeeded');
             })
             .error((errorMessage) => {
                 this.actions.disneylandWaitFailed(errorMessage);
-                console.log('fetch failed');
-                console.log(errorMessage);
             })
+    }
+
+    toJson(data) {
+        console.log('callback!');
+        console.log(data);
     }
 
     hoursFailed(errorMessage) {

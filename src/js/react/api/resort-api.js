@@ -2,7 +2,7 @@ module.exports = {
     fetchHours: function(opts) {
         var options = {
             url: 'http://now.wdwnt.com/api/widget/gettokyoparkhours',
-            contentType: "application/json",
+            contentType: 'application/json',
             type: 'get',
             dataType: 'jsonp'
         };
@@ -17,7 +17,7 @@ module.exports = {
     fetchWeather: function(opts) {
         var options = {
             url: 'http://now.wdwnt.com/api/weather/tdr',
-            contentType: "application/json",
+            contentType: 'application/json',
             type: 'get',
             dataType: 'jsonp'
         };
@@ -32,7 +32,7 @@ module.exports = {
     fetchWait: function(opts, id) {
         var options = {
             url: `http://now.wdwnt.com/tdr/attraction/getlist/${id}`,
-            contentType: "application/json",
+            contentType: 'application/json',
             type: 'get',
             dataType: 'jsonp'
         };
