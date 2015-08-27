@@ -31,7 +31,7 @@ module.exports = {
 
     fetchWait: function(opts, id) {
         var options = {
-            url: `http://now.wdwnt.com/tdr/attraction/getlist/${id}`,
+            url: `http://now.wdwnt.com/api/tdr/attraction/getwaittimes/${id}`,
             contentType: 'application/json',
             type: 'get',
             dataType: 'jsonp'
