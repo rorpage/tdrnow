@@ -50,7 +50,7 @@ var bowerJsIndependent = [
 ];
 
 var reactApps = [
-    'landing-page.js'
+    'react-app.js'
 ];
 
 var dependencies = [

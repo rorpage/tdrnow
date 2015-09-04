@@ -1,4 +1,4 @@
-require('./react/ui/landing-page');
+require('./react/ui/react-app');
 require('./plugins.js');
 
 

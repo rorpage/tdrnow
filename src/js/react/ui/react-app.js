@@ -1,5 +1,6 @@
 var React           = require('react');
 var Router          = require('react-router');
+var LandingPage     = require('../components/landingPage.jsx');
 var Weather         = require('../components/weather.jsx');
 var Hours           = require('../components/hours.jsx');
 var DisneylandWait  = require('../components/disneylandWait.jsx');
@@ -38,6 +39,7 @@ var routes = (
         <Route name="hours" handler={Hours} />
         <Route name="weather" handler={Weather} />
         <Route name="tdl" handler={DisneylandWait} />
+        <DefaultRoute handler={LandingPage} />
     </Route>
 );
 
