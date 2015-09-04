@@ -37,7 +37,7 @@ var Hours = React.createClass({
                 <h4>Hours</h4>
                 {this.state.hours.map((hour) => {
                     return (
-                        <ul>
+                        <ul key={hour.Abbreviation}>
                             <li>{hour.Abbreviation}</li>
                             <li>{hour.HoursOfOperation}</li>
                         </ul>

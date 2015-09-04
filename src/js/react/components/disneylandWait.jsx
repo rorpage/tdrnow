@@ -40,7 +40,7 @@ var DisneylandWait = React.createClass({
                 {error}
                 {this.state.disneylandWait.map((info) => {
                     return (
-                        <ul>
+                        <ul key={info.id}>
                             <li>{info.name}</li>
                         </ul>
                     )
