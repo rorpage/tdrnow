@@ -27,7 +27,7 @@ var Weather = React.createClass({
                 <h4>Error Occurred</h4>
             )
         }
-        if (this.state.weather.length < 1) {
+        if ($.isEmptyObject(this.state.weather)) {
             return (
                 <h4>Loading...</h4>
             )
@@ -36,7 +36,28 @@ var Weather = React.createClass({
         return (
             <div>
                 <h4>Weather</h4>
-                {this.state.weather.Date}
+                <ul>
+                    <li>{this.state.weather.Date}</li>
+                    <li>{this.state.weather.Temp}</li>
+                    <li>{this.state.weather.TempCelsius}</li>
+                    <li>{this.state.weather.Text}</li>
+                </ul>
+                <h5>Forecast</h5>
+                <ul>
+                    <li>{this.state.weather.TodaysForecast.High}</li>
+                    <li>{this.state.weather.TodaysForecast.HighCelsius}</li>
+                    <li>{this.state.weather.TodaysForecast.Low}</li>
+                    <li>{this.state.weather.TodaysForecast.LowCelsius}</li>
+                    <li>{this.state.weather.TodaysForecast.Text}</li>
+                </ul>
+                <h5>Tomorrows Forecast</h5>
+                <ul>
+                    <li>{this.state.weather.TomorrowsForecast.High}</li>
+                    <li>{this.state.weather.TomorrowsForecast.HighCelsius}</li>
+                    <li>{this.state.weather.TomorrowsForecast.Low}</li>
+                    <li>{this.state.weather.TomorrowsForecast.LowCelsius}</li>
+                    <li>{this.state.weather.TomorrowsForecast.Text}</li>
+                </ul>
             </div>
         )
     }

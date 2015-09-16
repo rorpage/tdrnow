@@ -45,10 +45,10 @@ var routes = (
 
 // Not working for some reason for clean URLS
 // https://github.com/rackt/react-router/issues/199
-// Router.run(routes, Router.HistoryLocation, function(Handler) {
-//     React.render(<Handler />, document.body);
-// });
-
-Router.run(routes, function(Handler) {
+Router.run(routes, Router.HistoryLocation, function(Handler) {
     React.render(<Handler />, document.body);
 });
+
+// Router.run(routes, function(Handler) {
+//     React.render(<Handler />, document.body);
+// });

@@ -26,7 +26,7 @@ var Hours = React.createClass({
                 <h4>Error Occurred</h4>
             );
         }
-        if (this.state.hours.length < 1) {
+        if ($.isEmptyObject(this.state.hours)) {
             return (
                 <h4>Loading...</h4>
             );
@@ -40,6 +40,7 @@ var Hours = React.createClass({
                         <ul key={hour.Abbreviation}>
                             <li>{hour.Abbreviation}</li>
                             <li>{hour.HoursOfOperation}</li>
+                            <li>{hour.passport_type}</li>
                         </ul>
                     )
                 })}
