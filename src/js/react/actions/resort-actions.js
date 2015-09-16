@@ -14,6 +14,10 @@ class ResortActions {
         this.dispatch(disneyland);
     }
 
+    updateDisneySeaWait(disneySea) {
+        this.dispatch(disneySea);
+    }
+
     fetchHours() {
         this.dispatch();
         Api.fetchHours()
@@ -44,7 +48,18 @@ class ResortActions {
             })
             .error((errorMessage) => {
                 this.actions.disneylandWaitFailed(errorMessage);
+            });
+    }
+
+    fetchDisneySeaWait(opts, id) {
+        this.dispatch();
+        Api.fetchWait(opts, id)
+            .done((wait) => {
+                this.actions.updateDisneySeaWait(wait);
             })
+            .error((errorMessage) => {
+                this.actions.disneySeaWaitFailed(errorMessage);
+            });
     }
 
     toJson(data) {
@@ -61,6 +76,10 @@ class ResortActions {
     }
 
     disneylandWaitFailed(errorMessage) {
+        this.dispatch(errorMessage);
+    }
+
+    disneySeaWaitFailed(errorMessage) {
         this.dispatch(errorMessage);
     }
 }

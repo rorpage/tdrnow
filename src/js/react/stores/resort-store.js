@@ -6,20 +6,27 @@ class ResortStore {
         this.hours = [];
         this.weather = {};
         this.disneylandWait = {};
+        this.disneySeaWait = {};
         this.errorMessage = null;
         this.weatherErrorMessage = null;
         this.disneylandWaitErrorMessage = null;
+        this.disneySeaWaitErrorMessage = null;
 
         this.bindListeners({
             handleUpdateHours: ResortActions.UPDATE_HOURS,
             handleUpdateWeather: ResortActions.UPDATE_WEATHER,
             handleUpdateDisneylandWait: ResortActions.UPDATE_DISNEYLAND_WAIT,
+            handleUpdateDisneySeaWait: ResortActions.UPDATE_DISNEY_SEA_WAIT,
+            
             handleFetchHours: ResortActions.FETCH_HOURS,
             handleFetchWeather: ResortActions.FETCH_WEATHER,
             handleFetchDisneylandWait: ResortActions.FETCH_DISNEYLAND_WAIT,
+            handleFetchDisneySeaWait: ResortActions.FETCH_DISNEY_SEA_WAIT,
+            
             handleHoursFailed: ResortActions.HOURS_FAILED,
             handleWeatherFailed: ResortActions.WEATHER_FAILED,
-            handleDisneylandWaitFailed: ResortActions.DISNEYLAND_WAIT_FAILED
+            handleDisneylandWaitFailed: ResortActions.DISNEYLAND_WAIT_FAILED,
+            handleDisneySeaWaitFailed: ResortActions.DISNEY_SEA_WAIT_FAILED
         });
     }
 
@@ -38,6 +45,10 @@ class ResortStore {
         this.disneylandWait = disneylandWait;
     }
 
+    handleUpdateDisneySeaWait(disneySeaWait) {
+        this.disneySeaWait = disneySeaWait;
+    }
+
     handleFetchHours() {
         this.hours = [];
     }
@@ -50,6 +61,10 @@ class ResortStore {
         this.disneylandWait = {};
     }
 
+    handleFetchDisneySeaWait() {
+        this.disneySeaWait = {};
+    }
+
     handleHoursFailed(errorMessage) {
         this.errorMessage = errorMessage;
     }
@@ -60,6 +75,10 @@ class ResortStore {
 
     handleDisneylandWaitFailed(errorMessage) {
         this.disneylandWaitErrorMessage = errorMessage;
+    }
+    
+    handleDisneySeaWaitFailed(errorMessage) {
+        this.disneySeaWaitErrorMessage = errorMessage;
     }
 }
 

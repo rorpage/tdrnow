@@ -4,14 +4,14 @@ var ResortActions   = require('../actions/resort-actions');
 var AttractionList  = require('./attractionList.jsx');
 var Error           = require('./utils/error.jsx');
 
-var DisneylandWait = React.createClass({
+var DisneySeaWait = React.createClass({
     getInitialState() {
         return ResortStore.getState();
     },
 
     componentDidMount() {
         ResortStore.listen(this.onChange);
-        ResortActions.fetchDisneylandWait({}, 1);
+        ResortActions.fetchDisneySeaWait({}, 2);
     },
 
     componentWillUnmount() {
@@ -36,10 +36,10 @@ var DisneylandWait = React.createClass({
         }
 
         return (
-            <AttractionList park={"Tokyo Disneyland"} error={error} disneyland={this.state.disneylandWait} />
+            <AttractionList park={"Tokyo DisneySea"} error={error} disneyland={this.state.disneylandWait} />
         );
 
     }
 });
 
-module.exports = DisneylandWait;
+module.exports = DisneySeaWait;
