@@ -25,18 +25,18 @@ var DisneySeaWait = React.createClass({
     render() {
 
         var error = null;
-        if (this.state.disneylandWaitErrorMessage) {
-            error = <Error message={this.state.disneylandWaitErrorMessage} />
+        if (this.state.disneySeaWaitErrorMessage) {
+            error = <Error message={this.state.disneySeaWaitErrorMessage} />
         }
 
-        if ($.isEmptyObject(this.state.disneylandWait)) {
+        if ($.isEmptyObject(this.state.disneySeaWait)) {
             return (
                 <h4>Loading...</h4>
             );
         }
 
         return (
-            <AttractionList park={"Tokyo DisneySea"} error={error} disneyland={this.state.disneylandWait} />
+            <AttractionList park={"Tokyo DisneySea"} error={error} times={this.state.disneySeaWait} />
         );
 
     }

@@ -14,8 +14,8 @@ class ResortActions {
         this.dispatch(disneyland);
     }
 
-    updateDisneySeaWait(disneySea) {
-        this.dispatch(disneySea);
+    updateDisneySeaWait(disneysea) {
+        this.dispatch(disneysea);
     }
 
     fetchHours() {

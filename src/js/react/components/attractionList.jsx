@@ -8,7 +8,7 @@ var AttractionList = React.createClass({
                 
                 {this.props.error}
 
-                {this.props.disneyland.map((info) => {
+                {this.props.times.map((info) => {
                     var fastPass = "Available";
                         if (!info.fastPass) {
                             fastPass = "Finished";
