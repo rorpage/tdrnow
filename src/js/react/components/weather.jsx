@@ -33,30 +33,31 @@ var Weather = React.createClass({
             )
         }
 
+        // May use this in the future
+        // <h5>Tomorrows Forecast</h5>
+        // <ul>
+        //     <li>{this.state.weather.TomorrowsForecast.High}</li>
+        //     <li>{this.state.weather.TomorrowsForecast.HighCelsius}</li>
+        //     <li>{this.state.weather.TomorrowsForecast.Low}</li>
+        //     <li>{this.state.weather.TomorrowsForecast.LowCelsius}</li>
+        //     <li>{this.state.weather.TomorrowsForecast.Text}</li>
+        // </ul>
+
         return (
             <div>
-                <h4>Weather</h4>
+                <h4><a href="/#/weather">Weather</a></h4>
                 <ul>
-                    <li>{this.state.weather.Date}</li>
-                    <li>{this.state.weather.Temp}</li>
-                    <li>{this.state.weather.TempCelsius}</li>
-                    <li>{this.state.weather.Text}</li>
+                    <li>{this.state.weather.Text} and {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;)</li>
                 </ul>
                 <h5>Forecast</h5>
                 <ul>
-                    <li>{this.state.weather.TodaysForecast.High}</li>
-                    <li>{this.state.weather.TodaysForecast.HighCelsius}</li>
-                    <li>{this.state.weather.TodaysForecast.Low}</li>
-                    <li>{this.state.weather.TodaysForecast.LowCelsius}</li>
                     <li>{this.state.weather.TodaysForecast.Text}</li>
-                </ul>
-                <h5>Tomorrows Forecast</h5>
-                <ul>
-                    <li>{this.state.weather.TomorrowsForecast.High}</li>
-                    <li>{this.state.weather.TomorrowsForecast.HighCelsius}</li>
-                    <li>{this.state.weather.TomorrowsForecast.Low}</li>
-                    <li>{this.state.weather.TomorrowsForecast.LowCelsius}</li>
-                    <li>{this.state.weather.TomorrowsForecast.Text}</li>
+                    <li>
+                        High: {this.state.weather.TodaysForecast.HighCelsius}&#8451; ({this.state.weather.TodaysForecast.High}&#8457;)
+                    </li>
+                    <li>
+                        Low: {this.state.weather.TodaysForecast.LowCelsius}&#8451; ({this.state.weather.TodaysForecast.Low}&#8457;)
+                    </li>
                 </ul>
             </div>
         )

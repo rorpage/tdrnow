@@ -15,4 +15,5 @@ $(function(){
 	let welcomeMsg = 'A Year of Wishes!';
 	let fullMsg = `${welcomeMsg} Only at Tokyo DisneySea!`;
 	console.log(fullMsg);
+	$(document).foundation();
 });

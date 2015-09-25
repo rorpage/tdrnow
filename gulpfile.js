@@ -42,7 +42,9 @@ var paths = {
 
 var bowerJs = [
     paths.bower + 'jquery/dist/jquery.min.js',
-    paths.bower + 'foundation/js/foundation.min.js'
+    paths.bower + 'foundation/js/foundation.min.js',
+    paths.bower + 'moment/min/moment.min.js',
+    paths.bower + 'moment-timezone/builds/moment-timezone.min.js',
 ];
 
 var bowerJsIndependent = [
