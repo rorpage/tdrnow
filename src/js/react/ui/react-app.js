@@ -5,7 +5,6 @@ var Weather         = require('../components/weather.jsx');
 var Hours           = require('../components/hours.jsx');
 var DisneylandWait  = require('../components/disneylandWait.jsx');
 var DisneySeaWait   = require('../components/disneySeaWait.jsx');
-var routes          = require('../routes/routes.js');
 
 // Router
 var DefaultRoute    = Router.DefaultRoute;
@@ -23,15 +22,15 @@ var App = React.createClass({
     }
 });
 
-// var routes = (
-//     <Route name="app" path="/" handler={App}>
-//         <Route name="hours" handler={Hours} />
-//         <Route name="weather" handler={Weather} />
-//         <Route name="tdl" handler={DisneylandWait} />
-//         <Route name="tds" handler={DisneySeaWait} />
-//         <DefaultRoute handler={LandingPage} />
-//     </Route>
-// );
+var routes = (
+    <Route name="app" path="/" handler={App}>
+        <Route name="hours" handler={Hours} />
+        <Route name="weather" handler={Weather} />
+        <Route name="tdl" handler={DisneylandWait} />
+        <Route name="tds" handler={DisneySeaWait} />
+        <DefaultRoute handler={LandingPage} />
+    </Route>
+);
 
 // Not working for some reason for clean URLS
 // https://github.com/rackt/react-router/issues/199

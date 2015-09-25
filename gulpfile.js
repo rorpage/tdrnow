@@ -1,7 +1,7 @@
 var indexOutput     = 'index.html';
 var tdsOutput       = 'tds.html';
 var tdlOutput       = 'tdl.html';
-var staticFolders   = ['src/img/*', 'src/fonts/*', 'src/server.js'];
+var staticFolders   = ['src/img/*', 'src/fonts/*'];
 var assestFolders   = ['src/js/vendor/'];
 
 var gulp                = require('gulp');
@@ -72,7 +72,6 @@ gulp.task('build', ['clean'], function() {
         'plugins',
         'handlebars',
         'browserify',
-        'browserify-server',
         'concat-vendor',
         'copy-static-assets'
     );
@@ -155,18 +154,6 @@ gulp.task('browserify', function() {
          .pipe(plugins.rename({ suffix: '.min' }))
          // .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
          .pipe(gulp.dest(paths.js.dist))
-});
-
-// TODO Re-write this
-gulp.task('browserify-server', function() {
-  return plugins.browserify('src/server.js')
-         .external(dependencies)
-         .transform(plugins.babelify)
-         .bundle()
-         .pipe(plugins.source('server.js'))
-         // .pipe(plugins.rename({ suffix: '.min' }))
-         // .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
-         .pipe(gulp.dest('dist/'))
 });
 
 /**
