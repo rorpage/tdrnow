@@ -1,6 +1,7 @@
-var React = require('react');
-var ResortStore = require('../stores/resort-store');
-var ResortActions = require('../actions/resort-actions');
+var React           = require('react');
+var ResortStore     = require('../stores/resort-store');
+var ResortActions   = require('../actions/resort-actions');
+var Utilities       = require('../../utils.js');
 
 var Hours = React.createClass({
     getInitialState() {
@@ -31,16 +32,19 @@ var Hours = React.createClass({
                 <h4>Loading...</h4>
             );
         }
-        
+
         return (
-            <div>
-                <h4>Hours</h4>
+            <div className="hours">
+                <h3><a href="/#/hours">Todays Hours</a></h3>
+
                 {this.state.hours.map((hour) => {
+                    var parkName = Utilities.convertToParkName(hour.Abbreviation);
+
                     return (
                         <ul key={hour.Abbreviation}>
-                            <li>{hour.Abbreviation}</li>
-                            <li>{hour.HoursOfOperation}</li>
-                            <li>{hour.passport_type}</li>
+                            <li className="title"><h5>{parkName}</h5></li>
+                            <li>Open {hour.HoursOfOperation}</li>
+                            <li>Passport Type: {hour.passport_type}</li>
                         </ul>
                     )
                 })}

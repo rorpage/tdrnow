@@ -17,20 +17,7 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <header>
-                    <div className="inner">
-                        <h1><strong>TDR</strong> Today</h1>
-                        <h3>Your park guide to Tokyo Disney Resort</h3>
-                    </div>
-                </header>
-                <main>
-                    <RouteHandler />
-                </main>
-                <footer>
-                    <div className="inner">
-                        <p>Made with <i className="fa fa-heart"></i> and <i className="fa fa-magic"></i> by <a href="http://www.tdrexplorer.com">TDR Explorer</a></p>
-                    </div>
-                </footer>
+                <RouteHandler />
             </div>
         );
     }
@@ -48,10 +35,10 @@ var App = React.createClass({
 
 // Not working for some reason for clean URLS
 // https://github.com/rackt/react-router/issues/199
-Router.run(routes, Router.HistoryLocation, function(Handler) {
-    React.render(<Handler />, document.body);
-});
-
-// Router.run(routes, function(Handler) {
+// Router.run(routes, Router.HistoryLocation, function(Handler) {
 //     React.render(<Handler />, document.body);
 // });
+
+Router.run(routes, function(Handler) {
+    React.render(<Handler />, document.getElementById('content'));
+});
