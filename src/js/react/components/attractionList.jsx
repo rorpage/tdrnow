@@ -3,21 +3,15 @@ var _     = require('lodash');
 
 var AttractionList = React.createClass({
     render: function() {
-
+        console.log(this.props.times);
         var grouped = _.groupBy(this.props.times, 'Location');
         var waitTimes = _.sortBy(this.props.times, 'Location');
 
         // console.log(grouped);
+        $.each(grouped, function(key, value) {
+            // console.log(key);
+        });
         // console.log(waitTimes);
-
-        // TODO Group all the items based on their location. So we need to get the key
-        // which is done already with the groupBy function. Now we need to iterate through.
-        // This is not right, I just threw it together
-        for (var i = 0; i < grouped.length; i++) {
-            for (var j = 0; j < grouped[i].length; j++) {
-                console.log(grouped[i][j]);
-            }
-        }
 
         return (
             <div>
