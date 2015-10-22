@@ -2,6 +2,8 @@ var React           = require('react');
 var ResortStore     = require('../stores/resort-store');
 var ResortActions   = require('../actions/resort-actions');
 var AttractionList  = require('./attractionList.jsx');
+var Lands           = require('../components/data/lands.jsx');
+var LandsList       = require('./landsList.jsx');
 var Error           = require('./utils/error.jsx');
 
 var DisneylandWait = React.createClass({
@@ -10,6 +12,9 @@ var DisneylandWait = React.createClass({
     },
 
     componentDidMount() {
+        this.setState({
+            initialLoad: true
+        });
         ResortStore.listen(this.onChange);
         ResortActions.fetchDisneylandWait({}, 1);
     },
@@ -20,6 +25,9 @@ var DisneylandWait = React.createClass({
 
     onChange(state) {
         this.setState(state);
+        this.setState({
+            initialLoad: false
+        });
     },
 
     render() {
@@ -29,10 +37,16 @@ var DisneylandWait = React.createClass({
             error = <Error message={this.state.disneylandWaitErrorMessage} />
         }
 
-        if ($.isEmptyObject(this.state.disneylandWait)) {
+        // if ($.isEmptyObject(this.state.disneylandWait)) {
+        //     return (
+        //         <h4>Loading...</h4>
+        //     );
+        // }
+
+        if (this.state.initialLoad) {
             return (
-                <h4>Loading...</h4>
-            );
+                <LandsList park={"Tokyo Disneyland"} lands={Lands.disneylandLands} />
+            )
         }
 
         return (

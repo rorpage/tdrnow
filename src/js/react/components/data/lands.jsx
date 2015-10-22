@@ -21,5 +21,29 @@ module.exports = {
 		{
 			name: "American Waterfront"
 		},
+	],
+
+	disneylandLands: [
+		{
+			name: "World Bazaar"
+		},
+		{
+			name: "Adventureland"
+		},
+		{
+			name: "Westernland"
+		},
+		{
+			name: "Critter Country"
+		},
+		{
+			name: "Fantasyland"
+		},
+		{
+			name: "Toontown"
+		},
+		{
+			name: "Tomorrowland"
+		},
 	]
 }

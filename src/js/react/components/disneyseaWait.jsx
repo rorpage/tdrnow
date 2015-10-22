@@ -4,6 +4,7 @@ var ResortActions   = require('../actions/resort-actions');
 var AttractionList  = require('./attractionList.jsx');
 var Error           = require('./utils/error.jsx');
 var Lands           = require('../components/data/lands.jsx');
+var LandsList       = require('./landsList.jsx');
 var alt             = require('../alt');
 
 var DisneySeaWait = React.createClass({
@@ -12,6 +13,9 @@ var DisneySeaWait = React.createClass({
     },
 
     componentDidMount() {
+        this.setState({
+            initialLoad: true
+        });
         ResortStore.listen(this.onChange);
         ResortActions.fetchDisneySeaWait({}, 2);
     },
@@ -22,6 +26,9 @@ var DisneySeaWait = React.createClass({
 
     onChange(state) {
         this.setState(state);
+        this.setState({
+            initialLoad: false
+        });
     },
 
     render() {
@@ -34,11 +41,18 @@ var DisneySeaWait = React.createClass({
         console.log('boostrapped');
         console.log(Lands.disneySeaPorts);
 
-        if ($.isEmptyObject(this.state.disneySeaWait)) {
+        // if ($.isEmptyObject(this.state.disneySeaWait)) {
+        //     return (
+        //         <h4>Loading...</h4>
+        //     );
+        // }
+
+        if (this.state.initialLoad) {
             return (
-                <h4>Loading...</h4>
-            );
+                <LandsList park={"Tokyo DisneySea"} lands={Lands.disneySeaPorts} />
+            )
         }
+
         return (
             <AttractionList park={"Tokyo DisneySea"} error={error} times={this.state.disneySeaWait} />
         );
