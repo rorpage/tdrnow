@@ -7,11 +7,14 @@ var AttractionList = React.createClass({
         var grouped = _.groupBy(this.props.times, 'Location');
         var waitTimes = _.sortBy(this.props.times, 'Location');
 
-        // console.log(grouped);
+        console.log('grouped');
+        console.log(grouped);
         $.each(grouped, function(key, value) {
-            // console.log(key);
+            console.log(key);
+            for (var i = 0; i < value.length; i++) {
+                console.log('attraction: ' + value[i].name);
+            }
         });
-        // console.log(waitTimes);
 
         return (
             <div>

@@ -7,15 +7,6 @@ class ResortStore {
         this.weather = {};
         this.disneylandWait = {};
         this.disneySeaWait = {};
-        // this.disneySeaWait = {
-        //     "American Waterfront": [],
-        //     "Arabian Coast": [],
-        //     "Lost River Delta": [],
-        //     "Mediterranean Harbor": [],
-        //     "Mermaid Lagoon": [],
-        //     "Mysterious Island": [],
-        //     "Port Discovery": []
-        // };
         this.errorMessage = null;
         this.weatherErrorMessage = null;
         this.disneylandWaitErrorMessage = null;

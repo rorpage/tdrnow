@@ -12,9 +12,6 @@ var DisneylandWait = React.createClass({
     },
 
     componentDidMount() {
-        this.setState({
-            initialLoad: true
-        });
         ResortStore.listen(this.onChange);
         ResortActions.fetchDisneylandWait({}, 1);
     },
@@ -25,9 +22,6 @@ var DisneylandWait = React.createClass({
 
     onChange(state) {
         this.setState(state);
-        this.setState({
-            initialLoad: false
-        });
     },
 
     render() {
@@ -37,13 +31,7 @@ var DisneylandWait = React.createClass({
             error = <Error message={this.state.disneylandWaitErrorMessage} />
         }
 
-        // if ($.isEmptyObject(this.state.disneylandWait)) {
-        //     return (
-        //         <h4>Loading...</h4>
-        //     );
-        // }
-
-        if (this.state.initialLoad) {
+        if ($.isEmptyObject(this.state.disneylandWait)) {
             return (
                 <LandsList park={"Tokyo Disneyland"} lands={Lands.disneylandLands} />
             )
