@@ -1,20 +1,24 @@
 var React = require('react');
 var _     = require('lodash');
+var Lands = require('../components/data/lands.jsx');
 
 var AttractionList = React.createClass({
     render: function() {
-        console.log(this.props.times);
         var grouped = _.groupBy(this.props.times, 'Location');
         var waitTimes = _.sortBy(this.props.times, 'Location');
 
-        console.log('grouped');
-        console.log(grouped);
-        $.each(grouped, function(key, value) {
-            console.log(key);
-            for (var i = 0; i < value.length; i++) {
-                console.log('attraction: ' + value[i].name);
-            }
+        var times = [];
+        var self = this;
+        $.each(Lands.disneySeaPorts, function(k, v) {
+            var attractions = _.filter(self.props.times, {'Location': v.name});
+            times.push(attractions);
         });
+
+        console.log('Grouped Times');
+        console.log(times);
+
+        console.log('Returned Times');
+        console.log(waitTimes);
 
         return (
             <div>
