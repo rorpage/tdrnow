@@ -1,52 +1,48 @@
-var React = require('react');
-var _     = require('lodash');
-var Lands = require('../components/data/lands.jsx');
+var React       = require('react');
+var _           = require('lodash');
+var Attraction  = require('../components/attractionDetail.jsx');
 
 var AttractionList = React.createClass({
     render: function() {
-        var grouped = _.groupBy(this.props.times, 'Location');
-        var waitTimes = _.sortBy(this.props.times, 'Location');
 
         var times = [];
         var self = this;
-        $.each(Lands.disneySeaPorts, function(k, v) {
+
+        /**
+         * Group attractions in into their specifics lands by creating
+         * an object with the name of the land and an array of all the
+         * attractions in that land
+         */
+        $.each(this.props.lands, function(k, v) {
             var attractions = _.filter(self.props.times, {'Location': v.name});
-            times.push(attractions);
+            var area = {
+                id: v.id,
+                land: v.name,
+                attractions: attractions
+            }
+            times.push(area);
         });
-
-        console.log('Grouped Times');
-        console.log(times);
-
-        console.log('Returned Times');
-        console.log(waitTimes);
 
         return (
             <div>
-                <h4>{this.props.park}</h4>
+                <h3>{this.props.park}</h3>
                 
                 {this.props.error}
 
-                {waitTimes.map((info) => {
-                    var fastPass = "Available";
-                        if (!info.fastPass) {
-                            fastPass = "Finished";
-                        }
+                {times.map((info) => {
+                    var attractions = [];
+                    for (var i = 0; i < info.attractions.length; i++) {
+                        attractions.push(<Attraction attraction={info.attractions[i]} />);
+                    }
 
-                        var singleRider = "Available";
-                        if (!info.singleRider) {
-                            singleRider = "Not Available";
-                        }
-                        
-                        return (
-                            <ul key={info.id}>
-                                <li>{info.name}</li>
-                                <li>{info.waitTime.postedWaitMinutes}</li>
-                                <li>{info.Location}</li>
-                                <li>FastPass: {fastPass}</li>
-                                <li>Single Rider: {singleRider}</li>
-                            </ul>
-                        )
+                    return (
+                        <div key={info.id}>
+                            <h4>{info.land}</h4>
+                            {attractions}
+                        </div>
+                    )
                 })}
+
             </div>
         );
     }

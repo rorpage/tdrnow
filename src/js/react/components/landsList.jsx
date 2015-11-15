@@ -6,10 +6,10 @@ var LandsList = React.createClass({
 			<div>
 				<h4>{this.props.park}</h4>
 
-				<ul>
+				<ul key={this.props.park}>
 					{this.props.lands.map((lands) => {
 						return (
-							<li>{lands.name}</li>
+							<li key={lands.id}>{lands.name}</li>
 						)
 					})}
 				</ul>
