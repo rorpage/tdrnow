@@ -25,7 +25,7 @@ var AttractionList = React.createClass({
 
         return (
             <div>
-                <h3>{this.props.park}</h3>
+                <h3><a href={"#/" + this.props.abrev}>{this.props.park}</a></h3>
                 
                 {this.props.error}
 

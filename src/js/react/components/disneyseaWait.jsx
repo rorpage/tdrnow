@@ -38,7 +38,7 @@ var DisneySeaWait = React.createClass({
         }
 
         return (
-            <AttractionList park={"Tokyo DisneySea"} error={error} times={this.state.disneySeaWait} lands={Lands.disneySeaPorts} />
+            <AttractionList park={"Tokyo DisneySea"}  abrev={"tds"} error={error} times={this.state.disneySeaWait} lands={Lands.disneySeaPorts} />
         );
 
     }

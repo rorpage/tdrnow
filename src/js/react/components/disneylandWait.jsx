@@ -38,7 +38,7 @@ var DisneylandWait = React.createClass({
         }
 
         return (
-            <AttractionList park={"Tokyo Disneyland"} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} />
+            <AttractionList park={"Tokyo Disneyland"} abrev={"tdl"} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} />
         );
 
     }

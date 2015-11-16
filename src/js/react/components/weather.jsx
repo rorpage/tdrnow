@@ -33,16 +33,6 @@ var Weather = React.createClass({
             )
         }
 
-        // May use this in the future
-        // <h5>Tomorrows Forecast</h5>
-        // <ul>
-        //     <li>{this.state.weather.TomorrowsForecast.High}</li>
-        //     <li>{this.state.weather.TomorrowsForecast.HighCelsius}</li>
-        //     <li>{this.state.weather.TomorrowsForecast.Low}</li>
-        //     <li>{this.state.weather.TomorrowsForecast.LowCelsius}</li>
-        //     <li>{this.state.weather.TomorrowsForecast.Text}</li>
-        // </ul>
-
         return (
             <div>
                 <h4><a href="/#/weather">Weather</a></h4>
