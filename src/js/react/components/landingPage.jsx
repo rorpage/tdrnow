@@ -4,6 +4,7 @@ var Weather         = require('../components/weather.jsx');
 var Hours           = require('../components/hours.jsx');
 var DisneylandWait  = require('../components/disneylandWait.jsx');
 var DisneySeaWait   = require('../components/disneySeaWait.jsx');
+var ParkHeader      = require('../components/parkHeader.jsx');
 
 var LandingPage = React.createClass({
     render() {
@@ -31,12 +32,12 @@ var LandingPage = React.createClass({
                 <div className="row" data-equalizer>
                     <div className="columns large-6" data-equalizer-watch>
                         <div className="box">
-                            <DisneylandWait />
+                            <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
                         </div>
                     </div>
                     <div className="columns large-6" data-equalizer-watch>
                         <div className="box">
-                            <DisneySeaWait />
+                            <ParkHeader abrev="tds" park="Tokyo DisneySea" />
                         </div>
                     </div>
                 </div>

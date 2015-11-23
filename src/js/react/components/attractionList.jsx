@@ -1,6 +1,7 @@
 var React       = require('react');
 var _           = require('lodash');
 var Attraction  = require('../components/attractionDetail.jsx');
+var ParkHeader  = require('../components/parkHeader.jsx');
 
 var AttractionList = React.createClass({
     render: function() {
@@ -25,7 +26,7 @@ var AttractionList = React.createClass({
 
         return (
             <div>
-                <h3><a href={"#/" + this.props.abrev}>{this.props.park}</a></h3>
+                <ParkHeader abrev={this.props.abrev} park={this.props.park} />
                 
                 {this.props.error}
 
@@ -36,7 +37,7 @@ var AttractionList = React.createClass({
                     }
 
                     return (
-                        <div key={info.id}>
+                        <div key={info.land}>
                             <h4>{info.land}</h4>
                             {attractions}
                         </div>
