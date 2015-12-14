@@ -1,8 +1,5 @@
 var indexOutput     = 'index.html';
-var tdsOutput       = 'tds.html';
-var tdlOutput       = 'tdl.html';
-var staticFolders   = ['src/img/*', 'src/fonts/*'];
-var assestFolders   = ['src/js/vendor/'];
+var staticFolders   = ['src/img/*','src/fonts/*', 'src/js/vendor/*'];
 
 var gulp                = require('gulp');
 var plugins             = require('gulp-load-plugins')();
@@ -24,6 +21,7 @@ var plugins             = require('gulp-load-plugins')();
 
 var paths = {
     bower: './bower_components/',
+    npm: './node_modules/',
     css: {
         base: 'src/css/',
         vendor: 'src/css/vendor/',
@@ -40,15 +38,12 @@ var paths = {
     }
 };
 
-var bowerJs = [
-    paths.bower + 'jquery/dist/jquery.min.js',
-    paths.bower + 'foundation/js/foundation.min.js',
-    paths.bower + 'moment/min/moment.min.js',
-    paths.bower + 'moment-timezone/builds/moment-timezone.min.js',
-];
-
-var bowerJsIndependent = [
-    paths.bower + 'modernizr/modernizr.js'
+var vendorJs = [
+    paths.npm + 'jquery/dist/jquery.min.js',
+    paths.npm + 'foundation-sites/dist/foundation.min.js',
+    paths.npm + 'moment/min/moment.min.js',
+    paths.npm + 'moment-timezone/builds/moment-timezone.min.js',
+    paths.npm + 'fastclick/lib/fastclick.js'
 ];
 
 var reactApps = [
@@ -160,7 +155,7 @@ gulp.task('browserify', function() {
  * Concat all vendor files by compiling the browserify and bower vendor files
  * and copying them into a temp folder. Once they are compiled then concat them together.
  */
-gulp.task('concat-vendor', ['browserify-vendor', 'bower-vendor', 'copy-bower-static'], function(){
+gulp.task('concat-vendor', ['browserify-vendor', 'bower-vendor'], function(){
     return gulp.src([paths.cache.base + '*.js'])
            .pipe(plugins.concat('vendor.js'))
            .pipe(plugins.rename({ suffix: '.min'}))
@@ -185,18 +180,11 @@ gulp.task('browserify-vendor', function(){
  * Concat all the js dependencies from bower
  */
 gulp.task('bower-vendor', function(){
-    return gulp.src(bowerJs)
+    return gulp.src(vendorJs)
            .pipe(plugins.concat('bower-vendor.js'))
            .pipe(gulp.dest(paths.cache.base));
 });
 
-/**
- * Simply copy bower dependencies that cannot be bundled together
- * ex: Mondernizr
- */
-gulp.task('copy-bower-static', function(){
-    copyBowerAssets(bowerJsIndependent, paths.js.dist + 'vendor/');
-});
 
 /**
  * Copy over all the static assests such as images and fonts
@@ -204,6 +192,11 @@ gulp.task('copy-bower-static', function(){
 gulp.task('copy-static-assets', function(){
     return gulp.src(staticFolders, { base: './src/' })
            .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('copy-assets', function(){
+  return gulp.src(assets, { base: './src/'})
+    .pipe(gulp.dest(paths.dist));
 });
 
 /**
