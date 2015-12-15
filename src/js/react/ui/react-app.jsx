@@ -8,9 +8,19 @@ import DisneySeaWait   from '../components/disneySeaWait.jsx';
 
 import { Router, IndexRoute, Route, Link, RouteHandler } from 'react-router'
 
+var App = React.createClass({
+    render() {
+        return (
+            <div>
+                {this.props.children}
+            </div>
+        );
+    }
+});
+
 var routes = (
     <Router>
-        <Route path="/" component={LandingPage}>
+        <Route path="/" component={App}>
             <Route path="hours" component={Hours} />
             <Route path="weather" component={Weather} />
             <Route path="tdl" component={DisneylandWait} />
@@ -24,6 +34,10 @@ var routes = (
 // https://github.com/rackt/react-router/issues/199
 // Router.run(routes, Router.HistoryLocation, function(Handler) {
 //     React.render(<Handler />, document.body);
+// });
+
+// Router.run(routes, function(Handler) {
+//     ReactDOM.render(<Handler />, document.getElementById('content'));
 // });
 
 ReactDOM.render((routes), document.getElementById('content'))

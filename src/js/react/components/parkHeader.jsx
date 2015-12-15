@@ -1,10 +1,11 @@
-import React from 'react';
+import React 	from 'react';
+import { Link } from 'react-router';
 
 var ParkHeader = React.createClass({
     render() {
         return (
             <h3>
-                <a href={"#/" + this.props.abrev}>{this.props.park}</a>
+                <Link to={"/" + this.props.abrev}>{this.props.park}</Link>
             </h3>
         )
     }
