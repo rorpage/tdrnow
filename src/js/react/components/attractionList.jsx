@@ -1,7 +1,8 @@
 var React       = require('react');
-var _           = require('lodash');
+// var _           = require('lodash');
 var Attraction  = require('../components/attractionDetail.jsx');
 var ParkHeader  = require('../components/parkHeader.jsx');
+import { filter } from 'lodash';
 
 var AttractionList = React.createClass({
     render: function() {
@@ -15,7 +16,7 @@ var AttractionList = React.createClass({
          * attractions in that land
          */
         $.each(this.props.lands, function(k, v) {
-            var attractions = _.filter(self.props.times, {'Location': v.name});
+            var attractions = filter(self.props.times, {'Location': v.name});
             var area = {
                 id: v.id,
                 land: v.name,

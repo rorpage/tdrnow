@@ -11,7 +11,6 @@ var plugins             = require('gulp-load-plugins')();
     plugins.handlebars  = require('gulp-compile-handlebars');
     plugins.minifyCss   = require('gulp-minify-css');
     plugins.browserify  = require('browserify');
-    plugins.reactify    = require('reactify');
     plugins.source      = require('vinyl-source-stream');
     plugins.streamify   = require('gulp-streamify');
     plugins.babelify    = require('babelify');
@@ -20,7 +19,6 @@ var plugins             = require('gulp-load-plugins')();
     plugins.server      = require('gulp-server-livereload');
 
 var paths = {
-    bower: './bower_components/',
     npm: './node_modules/',
     css: {
         base: 'src/css/',
@@ -32,9 +30,6 @@ var paths = {
         vendor: 'src/js/vendor/',
         react: 'src/js/react/ui/',
         dist: 'dist/js/'
-    },
-    cache: {
-        base: '.gulp-cache/'
     }
 };
 
@@ -64,10 +59,9 @@ gulp.task('default', ['build', 'watch', 'browserify-watch']);
 gulp.task('build', ['clean'], function() {
     gulp.start(
         'sass',
-        'plugins',
         'handlebars',
         'browserify',
-        'concat-vendor',
+        'js-vendor',
         'copy-static-assets'
     );
 });
@@ -78,6 +72,7 @@ gulp.task('build', ['clean'], function() {
 gulp.task('watch', function(){
     gulp.watch(paths.css.base + '**/*', ['sass']);
 });
+
 
 gulp.task('browserify-watch', function(){
     var bundler = plugins.watchify(plugins.browserify(paths.js.base + mainAppFile));
@@ -102,6 +97,7 @@ gulp.task('browserify-watch', function(){
     }
 });
 
+
 /**
  * Compile and minify all SASS files 
  */
@@ -112,16 +108,6 @@ gulp.task('sass', function() {
            .pipe(gulp.dest(paths.css.dist));
 });
 
-/**
- * Concat and minify all application js files
- */
-gulp.task('plugins', function(){
-    return gulp.src(['src/js/*.js', '!src/js/app.js'])
-           .pipe(plugins.concat('scripts.js'))
-           .pipe(plugins.rename({ suffix: '.min' }))
-           .pipe(plugins.uglify())
-           .pipe(gulp.dest(paths.js.dist))
-});
 
 /**
  * Compile handlebars templates with the appropriate content
@@ -137,52 +123,28 @@ gulp.task('handlebars', function(cb){
             .pipe(gulp.dest('dist'));
 });
 
+
 /**
  * Bundle all browerify required files into the app file
  */
 gulp.task('browserify', function() {
   return plugins.browserify(paths.js.base + mainAppFile)
-         .external(dependencies)
+         // .external(dependencies)
          .transform(plugins.babelify)
          .bundle()
          .pipe(plugins.source(mainAppFile))
          .pipe(plugins.rename({ suffix: '.min' }))
-         // .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+         .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
          .pipe(gulp.dest(paths.js.dist))
 });
 
-/**
- * Concat all vendor files by compiling the browserify and bower vendor files
- * and copying them into a temp folder. Once they are compiled then concat them together.
- */
-gulp.task('concat-vendor', ['browserify-vendor', 'bower-vendor'], function(){
-    return gulp.src([paths.cache.base + '*.js'])
-           .pipe(plugins.concat('vendor.js'))
-           .pipe(plugins.rename({ suffix: '.min'}))
-           .pipe(gulp.dest(paths.js.dist))
-});
 
-
-/**
- * Bundle all vendor dependencies into a single file
- */
-gulp.task('browserify-vendor', function(){
-    return plugins.browserify()
-           .require(dependencies)
-           .bundle()
-           .pipe(plugins.source('browserify-vendor.js'))
-           .pipe(plugins.streamify(plugins.uglify({ mangle:false })))
-           .pipe(gulp.dest(paths.cache.base))
-});
-
-
-/**
- * Concat all the js dependencies from bower
- */
-gulp.task('bower-vendor', function(){
-    return gulp.src(vendorJs)
-           .pipe(plugins.concat('bower-vendor.js'))
-           .pipe(gulp.dest(paths.cache.base));
+gulp.task('js-vendor', function(){
+  return gulp.src(vendorJs)
+    .pipe(plugins.concat('vendor.js'))
+    .pipe(plugins.uglify())
+    .pipe(plugins.rename({ suffix: '.min' }))
+    .pipe(gulp.dest(paths.js.dist));
 });
 
 
@@ -194,10 +156,6 @@ gulp.task('copy-static-assets', function(){
            .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('copy-assets', function(){
-  return gulp.src(assets, { base: './src/'})
-    .pipe(gulp.dest(paths.dist));
-});
 
 /**
  * Clean the dist/ folder before writing anything to it. Clear out any left behind files
@@ -206,12 +164,6 @@ gulp.task('clean', function(cb) {
     plugins.del(['dist'], cb)
 });
 
-/**
- * Clean up the temp/ folder
- */
-gulp.task('delete-temp', function(cb) {
-    plugins.del([paths.temp.base], cb);
-});
 
 /**
  * Live Reload Server
@@ -224,16 +176,3 @@ gulp.task('webserver', function(){
             open: true
         }));
 });
-
-/**
- * Helper Functions
- */
-function copyBowerAssets(bowerPackages, destination) {
-    var file = bowerPackages.shift();
-    gulp.src(file)
-        .pipe(gulp.dest(destination));
-
-    if (bowerPackages.length > 0) {
-        copyBowerAssets(bowerPackages, destination);
-    }
-}
