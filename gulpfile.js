@@ -1,22 +1,21 @@
 var indexOutput     = 'index.html';
 var staticFolders   = ['src/img/*','src/fonts/*', 'src/js/vendor/*'];
 
-var gulp                = require('gulp');
-var plugins             = require('gulp-load-plugins')();
-    plugins.sass        = require('gulp-ruby-sass'); 
-    plugins.rename      = require('gulp-rename');
-    plugins.uglify      = require('gulp-uglify'); 
-    plugins.concat      = require('gulp-concat'); 
-    plugins.del         = require('del');
-    plugins.handlebars  = require('gulp-compile-handlebars');
-    plugins.minifyCss   = require('gulp-minify-css');
-    plugins.browserify  = require('browserify');
-    plugins.source      = require('vinyl-source-stream');
-    plugins.streamify   = require('gulp-streamify');
-    plugins.babelify    = require('babelify');
-    plugins.watchify    = require('watchify');
-    plugins.gutil       = require('gulp-util');
-    plugins.server      = require('gulp-server-livereload');
+var gulp        = require('gulp')
+var sass        = require('gulp-ruby-sass'); 
+var rename      = require('gulp-rename');
+var uglify      = require('gulp-uglify'); 
+var concat      = require('gulp-concat'); 
+var del         = require('del');
+var handlebars  = require('gulp-compile-handlebars');
+var minifyCss   = require('gulp-minify-css');
+var browserify  = require('browserify');
+var source      = require('vinyl-source-stream');
+var streamify   = require('gulp-streamify');
+var babelify    = require('babelify');
+var watchify    = require('watchify');
+var gutil       = require('gulp-util');
+var server      = require('gulp-server-livereload');
 
 var paths = {
     npm: './node_modules/',
@@ -75,9 +74,9 @@ gulp.task('watch', function(){
 
 
 gulp.task('browserify-watch', function(){
-    var bundler = plugins.watchify(plugins.browserify(paths.js.base + mainAppFile));
+    var bundler = watchify(browserify(paths.js.base + mainAppFile));
     bundler.external(dependencies);
-    bundler.transform(plugins.babelify)
+    bundler.transform(babelify)
     bundler.on('update', rebundle);
     return rebundle();
 
@@ -85,14 +84,14 @@ gulp.task('browserify-watch', function(){
         var start = Date.now();
         return bundler.bundle()
             .on('error', function(err) {
-                plugins.gutil.log(plugins.gutil.colors.red(err.toString()));
+                gutil.log(gutil.colors.red(err.toString()));
             })
             .on('end', function(){
-                plugins.gutil.log(plugins.gutil.colors.green('Finished rebundling in', (Date.now() - start + 'ms')));
+                gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start + 'ms')));
             })
-            .pipe(plugins.source(mainAppFile))
-            .pipe(plugins.rename({ suffix: '.min' }))
-            .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+            .pipe(source(mainAppFile))
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(streamify(uglify({ mangle: false })))
             .pipe(gulp.dest(paths.js.dist));
     }
 });
@@ -102,9 +101,13 @@ gulp.task('browserify-watch', function(){
  * Compile and minify all SASS files 
  */
 gulp.task('sass', function() {
-    return plugins.sass(paths.css.base + '_styles.scss', { style: 'compressed', sourcemap: true })
-           .pipe(plugins.rename('styles.css'))
-           .pipe(plugins.rename({ suffix: '.min' }))
+    return sass(paths.css.base + 'main.scss', { 
+            style: 'compressed',
+            sourcemap: true 
+           })
+           .on('error', sass.logError)
+           .pipe(rename('styles.css'))
+           .pipe(rename({ suffix: '.min' }))
            .pipe(gulp.dest(paths.css.dist));
 });
 
@@ -118,8 +121,8 @@ gulp.task('handlebars', function(cb){
                 batch: ['./src/template/partials']
             };
     return gulp.src('src/template/index.handlebars')
-            .pipe(plugins.handlebars(templateData, options))
-            .pipe(plugins.rename(indexOutput))
+            .pipe(handlebars(templateData, options))
+            .pipe(rename(indexOutput))
             .pipe(gulp.dest('dist'));
 });
 
@@ -128,22 +131,22 @@ gulp.task('handlebars', function(cb){
  * Bundle all browerify required files into the app file
  */
 gulp.task('browserify', function() {
-  return plugins.browserify(paths.js.base + mainAppFile)
+  return browserify(paths.js.base + mainAppFile)
          // .external(dependencies)
-         .transform(plugins.babelify)
+         .transform(babelify, {presets: ['es2015', 'react']})
          .bundle()
-         .pipe(plugins.source(mainAppFile))
-         .pipe(plugins.rename({ suffix: '.min' }))
-         .pipe(plugins.streamify(plugins.uglify({ mangle: false })))
+         .pipe(source(mainAppFile))
+         .pipe(rename({ suffix: '.min' }))
+         // .pipe(streamify(uglify({ mangle: false })))
          .pipe(gulp.dest(paths.js.dist))
 });
 
 
 gulp.task('js-vendor', function(){
   return gulp.src(vendorJs)
-    .pipe(plugins.concat('vendor.js'))
-    .pipe(plugins.uglify())
-    .pipe(plugins.rename({ suffix: '.min' }))
+    .pipe(concat('vendor.js'))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.js.dist));
 });
 
@@ -161,7 +164,7 @@ gulp.task('copy-static-assets', function(){
  * Clean the dist/ folder before writing anything to it. Clear out any left behind files
  */
 gulp.task('clean', function(cb) {
-    plugins.del(['dist'], cb)
+    return del(['dist'], cb);
 });
 
 
@@ -170,9 +173,9 @@ gulp.task('clean', function(cb) {
  */
 gulp.task('webserver', function(){
     gulp.src('dist/')
-        .pipe(plugins.server({
+        .pipe(server({
             livereload: true,
-            // directoryListing: true,
-            open: true
+            open: true,
+            port: 8989
         }));
 });
