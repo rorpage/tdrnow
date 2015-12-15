@@ -3,84 +3,75 @@ import Api from '../api/resort-api';
 
 class ResortActions {
     updateHours(hours) {
-        this.dispatch(hours);
+        return hours;
     }
 
     updateWeather(weather) {
-        this.dispatch(weather);
+        return weather;
     }
 
     updateDisneylandWait(disneyland) {
-        this.dispatch(disneyland);
+        return disneyland;
     }
 
     updateDisneySeaWait(disneysea) {
-        this.dispatch(disneysea);
+        return disneysea;
     }
 
     fetchHours() {
-        this.dispatch();
-        Api.fetchHours()
+        return Api.fetchHours()
             .done((hours) => {
-                this.actions.updateHours(hours);
+                this.updateHours(hours);
             })
             .error((errorMessage) => {
-                this.actions.hoursFailed(errorMessage);
+                this.hoursFailed(errorMessage);
             });
     }
 
     fetchWeather() {
-        this.dispatch();
-        Api.fetchWeather()
+        return Api.fetchWeather()
             .done((weather) => {
-                this.actions.updateWeather(weather);
+                this.updateWeather(weather);
             })
             .error((errorMessage) => {
-                this.actions.weatherFailed(errorMessage);
+                this.weatherFailed(errorMessage);
             });
     }
 
     fetchDisneylandWait(opts, id) {
-        this.dispatch();
-        Api.fetchWait(opts, id)
+        return Api.fetchWait(opts, id)
             .done((wait) => {
-                this.actions.updateDisneylandWait(wait);
+                this.updateDisneylandWait(wait);
             })
             .error((errorMessage) => {
-                this.actions.disneylandWaitFailed(errorMessage);
+                this.disneylandWaitFailed(errorMessage);
             });
     }
 
     fetchDisneySeaWait(opts, id) {
-        this.dispatch();
-        Api.fetchWait(opts, id)
+        return Api.fetchWait(opts, id)
             .done((wait) => {
-                this.actions.updateDisneySeaWait(wait);
+                this.updateDisneySeaWait(wait);
             })
             .error((errorMessage) => {
-                this.actions.disneySeaWaitFailed(errorMessage);
+                this.disneySeaWaitFailed(errorMessage);
             });
     }
 
-    toJson(data) {
-        console.log('callback!');
-        console.log(data);
-    }
-
     hoursFailed(errorMessage) {
-        this.dispatch(errorMessage);
+        return errorMessage;
     }
 
     weatherFailed(errorMessage) {
-        this.dispatch(errorMessage);
+        return errorMessage;
     }
 
     disneylandWaitFailed(errorMessage) {
-        this.dispatch(errorMessage);
+        return errorMessage;
     }
 
     disneySeaWaitFailed(errorMessage) {
-        this.dispatch(errorMessage);
+        return errorMessage;
     }
 }
 
