@@ -1,5 +1,5 @@
-var alt = require('../alt');
-var Api = require('../api/resort-api.js');
+import alt from '../alt';
+import Api from '../api/resort-api.js';
 
 class ResortActions {
     updateHours(hours) {

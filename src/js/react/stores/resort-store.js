@@ -1,5 +1,5 @@
-var alt = require('../alt');
-var ResortActions = require('../actions/resort-actions');
+import alt           from '../alt';
+import ResortActions from '../actions/resort-actions';
 
 class ResortStore {
     constructor() {

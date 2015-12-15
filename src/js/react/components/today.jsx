@@ -1,5 +1,5 @@
-var React       = require('react');
-var ResortStore = require('../stores/resort-store');
+import React           from 'react';
+import ResortStore     from '../stores/resort-store';
 
 var Today = React.createClass({
 

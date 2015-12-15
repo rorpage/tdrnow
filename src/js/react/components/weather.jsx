@@ -1,6 +1,6 @@
-var React = require('react');
-var ResortStore = require('../stores/resort-store');
-var ResortActions = require('../actions/resort-actions');
+import React           from 'react';
+import ResortStore     from '../stores/resort-store';
+import ResortActions   from '../actions/resort-actions';
 
 var Weather = React.createClass({
     getInitialState() {

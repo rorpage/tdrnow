@@ -1,10 +1,10 @@
-var React           = require('react');
-var ResortStore     = require('../stores/resort-store');
-var ResortActions   = require('../actions/resort-actions');
-var AttractionList  = require('./attractionList.jsx');
-var Lands           = require('../components/data/lands.jsx');
-var LandsList       = require('./landsList.jsx');
-var Error           = require('./utils/error.jsx');
+import React           from 'react';
+import ResortStore     from '../stores/resort-store';
+import ResortActions   from '../actions/resort-actions';
+import AttractionList  from './attractionList.jsx';
+import Lands           from '../components/data/lands.jsx';
+import LandsList       from './landsList.jsx';
+import Error           from './utils/error.jsx';
 
 var DisneySeaWait = React.createClass({
     getInitialState() {

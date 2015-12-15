@@ -1,5 +1,5 @@
-require('./react/ui/react-app');
-require('./plugins.js');
+import './react/ui/react-app';
+import './plugins.js';
 
 
 /**

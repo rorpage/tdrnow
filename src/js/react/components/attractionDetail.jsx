@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var AttractionDetail = React.createClass({
     render: function() {

@@ -1,7 +1,7 @@
-var React           = require('react');
-var ResortStore     = require('../stores/resort-store');
-var ResortActions   = require('../actions/resort-actions');
-var Utilities       = require('../../utils.js');
+import React           from 'react';
+import ResortStore     from '../stores/resort-store';
+import ResortActions   from '../actions/resort-actions';
+import Utilities       from '../../utils.js';
 
 var Hours = React.createClass({
     getInitialState() {

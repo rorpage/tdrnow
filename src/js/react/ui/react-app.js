@@ -1,10 +1,10 @@
-var React           = require('react');
-var Router          = require('react-router');
-var LandingPage     = require('../components/landingPage.jsx');
-var Weather         = require('../components/weather.jsx');
-var Hours           = require('../components/hours.jsx');
-var DisneylandWait  = require('../components/disneylandWait.jsx');
-var DisneySeaWait   = require('../components/disneySeaWait.jsx');
+import React           from 'react';
+import Router          from 'react-router';
+import LandingPage     from '../components/landingPage.jsx';
+import Weather         from '../components/weather.jsx';
+import Hours           from '../components/hours.jsx';
+import DisneylandWait  from '../components/disneylandWait.jsx';
+import DisneySeaWait   from '../components/disneySeaWait.jsx';
 
 // Router
 var DefaultRoute    = Router.DefaultRoute;

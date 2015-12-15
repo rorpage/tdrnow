@@ -1,10 +1,10 @@
-var React           = require('react');
-var Today           = require('../components/today.jsx');
-var Weather         = require('../components/weather.jsx');
-var Hours           = require('../components/hours.jsx');
-var DisneylandWait  = require('../components/disneylandWait.jsx');
-var DisneySeaWait   = require('../components/disneySeaWait.jsx');
-var ParkHeader      = require('../components/parkHeader.jsx');
+import React           from 'react';
+import Today           from '../components/today.jsx';
+import Weather         from '../components/weather.jsx';
+import Hours           from '../components/hours.jsx';
+import DisneylandWait  from '../components/disneylandWait.jsx';
+import DisneySeaWait   from '../components/disneySeaWait.jsx';
+import ParkHeader      from '../components/parkHeader.jsx';
 
 var LandingPage = React.createClass({
     render() {

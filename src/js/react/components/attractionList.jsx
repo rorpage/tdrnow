@@ -1,7 +1,6 @@
-var React       = require('react');
-// var _           = require('lodash');
-var Attraction  = require('../components/attractionDetail.jsx');
-var ParkHeader  = require('../components/parkHeader.jsx');
+import React      from  'react';
+import Attraction from '../components/attractionDetail.jsx';
+import ParkHeader from '../components/parkHeader.jsx';
 import { filter } from 'lodash';
 
 var AttractionList = React.createClass({
