@@ -1,7 +1,7 @@
 import React from 'react';
 
 var LandsList = React.createClass({
-	render: function() {
+	render() {
 		return (
 			<div>
 				<h4>{this.props.park}</h4>

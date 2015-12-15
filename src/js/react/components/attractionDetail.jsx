@@ -1,9 +1,9 @@
 import React from 'react';
 
 var AttractionDetail = React.createClass({
-    render: function() {
+    render() {
         return (
-            <ul key={this.props.attraction.id}>
+            <ul>
                 <li>{this.props.attraction.name}</li>
                 <li>{this.props.attraction.waitTime.postedWaitMinutes}</li>
             </ul>

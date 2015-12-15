@@ -2,7 +2,7 @@ import React from 'react';
 
 var Error = React.createClass({
     
-    render: function() {
+    render() {
         return (
             <div className="error">
                 {this.props.message}

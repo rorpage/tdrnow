@@ -4,7 +4,7 @@ import ParkHeader from '../components/parkHeader.jsx';
 import { filter } from 'lodash';
 
 var AttractionList = React.createClass({
-    render: function() {
+    render() {
 
         var times = [];
         var self = this;
@@ -33,7 +33,7 @@ var AttractionList = React.createClass({
                 {times.map((info) => {
                     var attractions = [];
                     for (var i = 0; i < info.attractions.length; i++) {
-                        attractions.push(<Attraction attraction={info.attractions[i]} />);
+                        attractions.push(<Attraction key={info.attractions[i].id} attraction={info.attractions[i]} />);
                     }
 
                     return (
