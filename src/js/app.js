@@ -1,4 +1,4 @@
-import './react/ui/react-app';
+import './react/ui/react-app.jsx';
 import './plugins.js';
 
 

@@ -2,7 +2,7 @@ import React           from 'react';
 import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
 import AttractionList  from './attractionList.jsx';
-import Lands           from '../components/data/lands.jsx';
+import Lands           from '../components/data/lands.js';
 import LandsList       from './landsList.jsx';
 import Error           from './utils/error.jsx';
 

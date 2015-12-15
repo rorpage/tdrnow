@@ -1,5 +1,5 @@
 import alt from '../alt';
-import Api from '../api/resort-api.js';
+import Api from '../api/resort-api';
 
 class ResortActions {
     updateHours(hours) {
