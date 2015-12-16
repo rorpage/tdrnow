@@ -1,15 +1,20 @@
 @import url(http://fonts.googleapis.com/css?family=Nunito:400,300);
 
+// Foundation Requires
+@import '../../node_modules/foundation-sites/scss/vendor/normalize';
+@import '../../node_modules/foundation-sites/scss/util/util';
+@import '../../node_modules/foundation-sites/scss/global';
+
+// Foundation Components
+@import '../../node_modules/foundation-sites/scss/grid/grid';
+@import '../../node_modules/foundation-sites/scss/typography/typography';
+
 // Vendor Components
-@import 'vendor/normalize';
-@import 'vendor/foundation';
-@import 'vendor/html5boilerplate';
-@import 'vendor/fontawesome/font-awesome';
+@import '../../node_modules/font-awesome/scss/font-awesome';
 
 // Custom Styles
 @import 'variables';
 @import 'mixin';
 @import 'font';
-// @import 'grid';
 @import 'styles';
 @import 'overrides';

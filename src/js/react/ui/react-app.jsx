@@ -36,8 +36,4 @@ var routes = (
 //     React.render(<Handler />, document.body);
 // });
 
-// Router.run(routes, function(Handler) {
-//     ReactDOM.render(<Handler />, document.getElementById('content'));
-// });
-
 ReactDOM.render((routes), document.getElementById('content'))
