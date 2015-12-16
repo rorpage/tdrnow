@@ -1,13 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Nunito:400,300);
 
-// Foundation Requires
-@import '../../node_modules/foundation-sites/scss/vendor/normalize';
-@import '../../node_modules/foundation-sites/scss/util/util';
-@import '../../node_modules/foundation-sites/scss/global';
-
-// Foundation Components
-@import '../../node_modules/foundation-sites/scss/grid/grid';
-@import '../../node_modules/foundation-sites/scss/typography/typography';
+// Foundation
+// The includes are inside the foundation.scss file
+@import '../../node_modules/foundation-sites/scss/foundation';
+@include foundation-global-styles;
+@include foundation-flex-grid;
+@include foundation-float-classes;
+@include foundation-typography;
 
 // Vendor Components
 @import '../../node_modules/font-awesome/scss/font-awesome';
