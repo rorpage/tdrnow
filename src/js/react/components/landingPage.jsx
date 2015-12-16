@@ -12,30 +12,24 @@ var LandingPage = React.createClass({
             <div>
                 <div className="row">
                     <div className="columns large-12">
-                        <div className="box">
-                            <Today />
-                        </div>
+                        <Today />
                     </div>
                 </div>
-                <div className="row" data-equalizer>
-                    <div className="columns large-6" data-equalizer-watch>
-                        <div className="box">
-                            <Weather />
-                        </div>
+                <div className="row">
+                    <div className="columns large-6">
+                        <Weather />
                     </div>
-                    <div className="columns large-6" data-equalizer-watch>
-                        <div className="box">
-                            <Hours />
-                        </div>
+                    <div className="columns large-6">
+                        <Hours />
                     </div>
                 </div>
-                <div className="row" data-equalizer>
-                    <div className="columns large-6" data-equalizer-watch>
+                <div className="row">
+                    <div className="columns large-6">
                         <div className="box">
                             <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
                         </div>
                     </div>
-                    <div className="columns large-6" data-equalizer-watch>
+                    <div className="columns large-6">
                         <div className="box">
                             <ParkHeader abrev="tds" park="Tokyo DisneySea" />
                         </div>

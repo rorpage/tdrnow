@@ -1,6 +1,7 @@
 import React           from 'react';
 import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
+import { Link }        from 'react-router';
 
 var Weather = React.createClass({
     getInitialState() {
@@ -29,13 +30,16 @@ var Weather = React.createClass({
         }
         if ($.isEmptyObject(this.state.weather)) {
             return (
-                <h4>Loading...</h4>
+                <div className="box weather">
+                    <h3><Link to="/weather">Weather</Link></h3>
+                    <h4>Loading...</h4>
+                </div>
             )
         }
 
         return (
-            <div>
-                <h4><a href="/#/weather">Weather</a></h4>
+            <div className="box weather">
+                <h3><Link to="/weather">Weather</Link></h3>
                 <ul>
                     <li>{this.state.weather.Text} and {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;)</li>
                 </ul>

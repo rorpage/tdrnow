@@ -2,6 +2,7 @@ import React           from 'react';
 import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
 import Utilities       from '../../utils';
+import { Link }        from 'react-router';
 
 var Hours = React.createClass({
     getInitialState() {
@@ -29,13 +30,16 @@ var Hours = React.createClass({
         }
         if ($.isEmptyObject(this.state.hours)) {
             return (
-                <h4>Loading...</h4>
+                <div className="box hours">
+                    <h3><Link to="/hours">Todays Hours</Link></h3>
+                    <h4>Loading...</h4>
+                </div>
             );
         }
 
         return (
-            <div className="hours">
-                <h3><a href="/#/hours">Todays Hours</a></h3>
+            <div className="box hours">
+                <h3><Link to="/hours">Todays Hours</Link></h3>
 
                 {this.state.hours.map((hour) => {
                     var parkName = Utilities.convertToParkName(hour.Abbreviation);
