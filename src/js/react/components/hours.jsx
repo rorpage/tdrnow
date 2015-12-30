@@ -45,7 +45,7 @@ var Hours = React.createClass({
                     var parkName = Utilities.convertToParkName(hour.Abbreviation);
 
                     return (
-                        <ul key={hour.Abbreviation}>
+                        <ul key={hour.Abbreviation.toLowerCase()}>
                             <li className="title"><h5>{parkName}</h5></li>
                             <li>Open {hour.HoursOfOperation}</li>
                             <li>Passport Type: {hour.passport_type}</li>
