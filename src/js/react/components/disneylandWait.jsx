@@ -15,14 +15,22 @@ var DisneylandWait = React.createClass({
     componentDidMount() {
         ResortStore.listen(this.onChange);
 
+        // Added cache invalidation. But this needs serious work. This is the first iteration just to get it working
         let cachedWait = localStorage.getItem('tdl');
+        let cachedTimestamp = localStorage.getItem('cacheTimeStamp');
+        let cacheInvalid = false;
 
-        let cacheInvalid = localStorage.getItem('cacheTimeStamp') < moment().format('MMMM Do YYYY, h:mm:ss a');
+        if (cachedTimestamp) {
+            let currentTime = moment();
+            console.log('time difference:');
+            let timeDifference = currentTime.diff(moment($.parseJSON(cachedTimestamp)), 'minutes');
 
-        // Utils.isCacheValid(localStorage.getItem('cacheTimeStamp'));
-
-        if (cacheInvalid) {
-            console.log('cache is invalid');
+            if (timeDifference > 5) {
+                cacheInvalid = true;
+                console.log('cache is invalid');
+            } else {
+                console.log('cache is STILL valid');
+            }
         }
 
         if (cachedWait && !cacheInvalid) {
@@ -38,7 +46,7 @@ var DisneylandWait = React.createClass({
 
     onChange(state) {
         localStorage.setItem('tdl', JSON.stringify(state.disneylandWait));
-        localStorage.setItem('cacheTimeStamp', moment().format('MMMM Do YYYY, h:mm:ss a'));
+        localStorage.setItem('cacheTimeStamp', JSON.stringify(moment()));
         console.log(moment());
         this.setState(state);
     },
