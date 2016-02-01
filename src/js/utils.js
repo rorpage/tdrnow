@@ -14,6 +14,12 @@ module.exports = {
             parkName = this.parkNames[abbrev];
         }
         return parkName;
+    },
+
+    isCacheValid: function (timeStamp) {
+        let currentTime = moment();
+        // let currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+        console.log(currentTime.diff(timeStamp, 'minute'));
     }
 
 };

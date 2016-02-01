@@ -1,5 +1,5 @@
 var indexOutput     = 'index.html';
-var staticFolders   = ['src/img/*','src/fonts/*', 'src/js/vendor/*'];
+var staticFolders   = ['src/img/*','src/fonts/*', 'src/js/vendor/*', 'src/index.html'];
 
 var gulp        = require('gulp')
 var sass        = require('gulp-ruby-sass'); 
@@ -7,7 +7,6 @@ var rename      = require('gulp-rename');
 var uglify      = require('gulp-uglify'); 
 var concat      = require('gulp-concat'); 
 var del         = require('del');
-var handlebars  = require('gulp-compile-handlebars');
 var minifyCss   = require('gulp-minify-css');
 var browserify  = require('browserify');
 var source      = require('vinyl-source-stream');
@@ -58,7 +57,6 @@ gulp.task('default', ['build', 'watch', 'browserify-watch']);
 gulp.task('build', ['clean'], function() {
     gulp.start(
         'sass',
-        'handlebars',
         'browserify',
         'js-vendor',
         'copy-static-assets'
@@ -110,22 +108,6 @@ gulp.task('sass', function() {
            .pipe(rename({ suffix: '.min' }))
            .pipe(gulp.dest(paths.css.dist));
 });
-
-
-/**
- * Compile handlebars templates with the appropriate content
- */
-gulp.task('handlebars', function(cb){
-    var templateData = require('./src/template/setup-content.json'),
-            options = {
-                batch: ['./src/template/partials']
-            };
-    return gulp.src('src/template/index.handlebars')
-            .pipe(handlebars(templateData, options))
-            .pipe(rename(indexOutput))
-            .pipe(gulp.dest('dist'));
-});
-
 
 /**
  * Bundle all browerify required files into the app file

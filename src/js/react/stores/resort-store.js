@@ -18,6 +18,8 @@ class ResortStore {
             handleUpdateDisneylandWait: ResortActions.UPDATE_DISNEYLAND_WAIT,
             handleUpdateDisneySeaWait: ResortActions.UPDATE_DISNEY_SEA_WAIT,
             
+            // TODO These are not firing - maybe altjs changed how this is handled?
+            // http://alt.js.org/guide/async/
             handleFetchHours: ResortActions.FETCH_HOURS,
             handleFetchWeather: ResortActions.FETCH_WEATHER,
             handleFetchDisneylandWait: ResortActions.FETCH_DISNEYLAND_WAIT,
@@ -31,6 +33,7 @@ class ResortStore {
     }
 
     handleUpdateHours(hours) {
+        this.hours = [];
         this.hours.push(hours.Tds);
         this.hours.push(hours.Tdl);
         this.errorMessage = null;
