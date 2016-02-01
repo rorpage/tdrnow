@@ -1,4 +1,6 @@
 import React           from 'react';
+import MainHeader      from '../components/mainHeader.jsx';
+import MainFooter      from '../components/mainFooter.jsx';
 import Today           from '../components/today.jsx';
 import Weather         from '../components/weather.jsx';
 import Hours           from '../components/hours.jsx';
@@ -10,9 +12,18 @@ var LandingPage = React.createClass({
     render() {
         return (
             <div>
-                <div className="row">
-                    <div className="columns large-12">
+                <header>
+                    <div className="row">
+                        <MainHeader />
                         <Today />
+                    </div>
+                </header>
+                <div className="row">
+                    <div className="columns large-6">
+                        <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
+                    </div>
+                    <div className="columns large-6">
+                        <ParkHeader abrev="tds" park="Tokyo DisneySea" />
                     </div>
                 </div>
                 <div className="row">
@@ -23,18 +34,11 @@ var LandingPage = React.createClass({
                         <Hours />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="columns large-6">
-                        <div className="box">
-                            <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
-                        </div>
+                <footer>
+                    <div className="row">
+                        <MainFooter />
                     </div>
-                    <div className="columns large-6">
-                        <div className="box">
-                            <ParkHeader abrev="tds" park="Tokyo DisneySea" />
-                        </div>
-                    </div>
-                </div>
+                </footer>
             </div>
         )
     }

@@ -34,9 +34,13 @@ var Today = React.createClass({
         var currentTime = moment().tz('Asia/Tokyo').format('h:mm a');
 
         return (
-            <div className="box today">
-                <span>It is {currentTime} on {currentDate} at Tokyo Disney Resort. </span>
-                <span>With a current temperature of {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;). </span>
+            <div className="columns large-12 today">
+                <div className="current-time">{currentTime}</div>
+                <div>on {currentDate}</div>
+                <div>at Tokyo Disney Resort</div>
+                <div>current temperature</div>
+                <div>{this.state.weather.TempCelsius}&#8451;</div>
+                <div>{this.state.weather.Temp}&#8457;</div>
             </div>
         )
     }
