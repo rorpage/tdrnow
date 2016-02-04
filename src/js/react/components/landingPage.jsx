@@ -2,6 +2,7 @@ import React           from 'react';
 import MainHeader      from '../components/mainHeader.jsx';
 import MainFooter      from '../components/mainFooter.jsx';
 import Today           from '../components/today.jsx';
+import Time            from '../components/time.jsx';
 import Weather         from '../components/weather.jsx';
 import Hours           from '../components/hours.jsx';
 import DisneylandWait  from '../components/disneylandWait.jsx';
@@ -12,33 +13,28 @@ var LandingPage = React.createClass({
     render() {
         return (
             <div>
-                <header>
+                <header className="landing-header">
                     <div className="row">
                         <MainHeader />
+                        <Time />
                         <Today />
                     </div>
                 </header>
-                <div className="row">
-                    <div className="columns large-6">
+                <main className="main-content">
+                    <div className="row">
                         <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
-                    </div>
-                    <div className="columns large-6">
                         <ParkHeader abrev="tds" park="Tokyo DisneySea" />
                     </div>
-                </div>
-                <div className="row">
-                    <div className="columns large-6">
-                        <Weather />
-                    </div>
-                    <div className="columns large-6">
-                        <Hours />
-                    </div>
-                </div>
-                <footer>
                     <div className="row">
-                        <MainFooter />
+                        <div className="columns large-6">
+                            <Weather />
+                        </div>
+                        <div className="columns large-6">
+                            <Hours />
+                        </div>
                     </div>
-                </footer>
+                </main>
+                <MainFooter />
             </div>
         )
     }

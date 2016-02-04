@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 var ParkHeader = React.createClass({
     render() {
         return (
-            <h3>
-                <Link to={"/" + this.props.abrev}>{this.props.park}</Link>
-            </h3>
+        	<div className={ "columns large-6 main-content_button " + this.props.abrev }>
+                <Link to={"/" + this.props.abrev} className="main-content_link">{this.props.park}</Link>
+            </div>
         )
     }
 });
