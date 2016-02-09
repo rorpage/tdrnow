@@ -19,3 +19,7 @@
      -moz-box-sizing: $box-model; // Firefox <= 19
           box-sizing: $box-model;
 }
+
+@mixin dark-transparent-bg($transparency) {
+	background: rgba(37, 56, 78, $transparency);
+}

@@ -38,22 +38,26 @@ var Weather = React.createClass({
         }
 
         return (
-            <div className="box weather">
-                <h3><Link to="/weather">Weather</Link></h3>
-                <ul>
-                    <li>{this.state.weather.Text} and {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;)</li>
-                </ul>
-                <h5>Forecast</h5>
-                <ul>
-                    <li>{this.state.weather.TodaysForecast.Text}</li>
-                    <li>
-                        High: {this.state.weather.TodaysForecast.HighCelsius}&#8451; ({this.state.weather.TodaysForecast.High}&#8457;)
-                    </li>
-                    <li>
-                        Low: {this.state.weather.TodaysForecast.LowCelsius}&#8451; ({this.state.weather.TodaysForecast.Low}&#8457;)
-                    </li>
-                </ul>
+            <div className="weather">
+                <h3 className="weather__header">Weather</h3>
             </div>
+
+            // <div className="box weather">
+            //     <h3><Link to="/weather">Weather</Link></h3>
+            //     <ul>
+            //         <li>{this.state.weather.Text} and {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;)</li>
+            //     </ul>
+            //     <h5>Forecast</h5>
+            //     <ul>
+            //         <li>{this.state.weather.TodaysForecast.Text}</li>
+            //         <li>
+            //             High: {this.state.weather.TodaysForecast.HighCelsius}&#8451; ({this.state.weather.TodaysForecast.High}&#8457;)
+            //         </li>
+            //         <li>
+            //             Low: {this.state.weather.TodaysForecast.LowCelsius}&#8451; ({this.state.weather.TodaysForecast.Low}&#8457;)
+            //         </li>
+            //     </ul>
+            // </div>
         )
     }
 });

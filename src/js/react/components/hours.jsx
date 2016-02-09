@@ -38,22 +38,25 @@ var Hours = React.createClass({
         }
 
         return (
-            <div className="box hours">
-                <h3><Link to="/hours">Todays Hours</Link></h3>
-
-                {this.state.hours.map((hour) => {
-                    var parkName = Utilities.convertToParkName(hour.Abbreviation);
-
-                    return (
-                        <ul key={hour.Abbreviation.toLowerCase()}>
-                            <li className="title"><h5>{parkName}</h5></li>
-                            <li>Open {hour.HoursOfOperation}</li>
-                            <li>Passport Type: {hour.passport_type}</li>
-                        </ul>
-                    )
-                })}
-                
+            <div className="hours">
+                <h3 className="hours__header">Hours</h3>
             </div>
+            // <div className="box hours">
+            //     <h3><Link to="/hours">Todays Hours</Link></h3>
+
+            //     {this.state.hours.map((hour) => {
+            //         var parkName = Utilities.convertToParkName(hour.Abbreviation);
+
+            //         return (
+            //             <ul key={hour.Abbreviation.toLowerCase()}>
+            //                 <li className="title"><h5>{parkName}</h5></li>
+            //                 <li>Open {hour.HoursOfOperation}</li>
+            //                 <li>Passport Type: {hour.passport_type}</li>
+            //             </ul>
+            //         )
+            //     })}
+                
+            // </div>
         );
     }
 });
