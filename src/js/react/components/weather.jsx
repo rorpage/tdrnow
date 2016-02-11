@@ -39,8 +39,8 @@ var Weather = React.createClass({
 
         return (
             <div className="weather">
-                <img classame="icon weather__icon" src="/img/icon_weather@2x.png" />
-                <h3 className="weather__header">Weather</h3>
+                <img className="icon weather__icon" src="/img/icon_weather@2x.png" />
+                <Link className="weather__header" to="/weather">Weather</Link>
             </div>
 
             // <div className="box weather">

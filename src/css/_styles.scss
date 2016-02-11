@@ -12,8 +12,20 @@ h4 {
   color: $font-default;
 }
 
-.tdl { background-color: $tdl-base; }
-.tds { background-color: $tds-base; }
+.tdl { 
+  background-color: $tdl-base;
+
+  &:hover {
+    background-color: darken($tdl-base, 5%);
+  }
+}
+.tds { 
+  background-color: $tds-base; 
+
+  &:hover {
+    background-color: darken($tds-base, 5%);
+  }
+}
 
 .content {
   background: linear-gradient(rgba(20, 51, 100, 0.4), rgba(20, 51, 100, 0.4)), url('../img/hero.jpg');
@@ -59,6 +71,10 @@ h4 {
 
 .main-content_link {
   color: $font-default;
+
+  &:hover {
+    color: $font-default;
+  }
 }
 
 main {
@@ -82,7 +98,13 @@ main {
 
 .hours,
 .weather {
+  align-items: center;
+  display: flex;
   text-transform: uppercase;
+}
+
+.icon {
+  margin-right: .5em;
 }
 
 .hours {
@@ -92,6 +114,15 @@ main {
 
   h5 {
     margin-top: 0;
+  }
+}
+
+.weather__header,
+.hours__header {
+  color: $font-default;
+
+  &:hover {
+    color: $font-default;
   }
 }
 
