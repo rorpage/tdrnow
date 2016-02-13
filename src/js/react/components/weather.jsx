@@ -42,23 +42,6 @@ var Weather = React.createClass({
                 <img className="icon weather__icon" src="/img/icon_weather@2x.png" />
                 <Link className="weather__header" to="/weather">Weather</Link>
             </div>
-
-            // <div className="box weather">
-            //     <h3><Link to="/weather">Weather</Link></h3>
-            //     <ul>
-            //         <li>{this.state.weather.Text} and {this.state.weather.TempCelsius}&#8451; ({this.state.weather.Temp}&#8457;)</li>
-            //     </ul>
-            //     <h5>Forecast</h5>
-            //     <ul>
-            //         <li>{this.state.weather.TodaysForecast.Text}</li>
-            //         <li>
-            //             High: {this.state.weather.TodaysForecast.HighCelsius}&#8451; ({this.state.weather.TodaysForecast.High}&#8457;)
-            //         </li>
-            //         <li>
-            //             Low: {this.state.weather.TodaysForecast.LowCelsius}&#8451; ({this.state.weather.TodaysForecast.Low}&#8457;)
-            //         </li>
-            //     </ul>
-            // </div>
         )
     }
 });

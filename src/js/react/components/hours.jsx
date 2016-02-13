@@ -40,7 +40,7 @@ var Hours = React.createClass({
         return (
             <div className="hours">
                 <img className="icon hours__icon" src="/img/icon_clock@2x.png" />
-                <Link className="hours__header" to="/hours">Todays Hours</Link>
+                <Link className="hours__header" to="/hours">Hours</Link>
             </div>
             // <div className="box hours">
             //     <h3><Link to="/hours">Todays Hours</Link></h3>

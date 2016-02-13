@@ -18,9 +18,8 @@ var Time = React.createClass({
 
         return (
             <div className="columns small-12 large-12 landing-header_time">
-                <h1>{currentTime}</h1>
-                <div>on {currentDate}</div>
-                <div>at Tokyo Disney Resort</div>
+                <h1 className="landing-header_h1">{currentTime}</h1>
+                <h2>{currentDate}</h2>
             </div>
         )
     }
