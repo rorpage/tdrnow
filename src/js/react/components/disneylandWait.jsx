@@ -1,6 +1,7 @@
 import React           from 'react';
 import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
+import ParkHeader      from '../components/parkHeaderLarge.jsx';
 import AttractionList  from './attractionList.jsx';
 import Lands           from '../components/data/lands.js';
 import LandsList       from './landsList.jsx';
@@ -58,13 +59,22 @@ var DisneylandWait = React.createClass({
             error = <Error message={this.state.disneylandWaitErrorMessage} />
         }
 
+        let abrev = "tdl";
+        let park = "Tokyo Disneyland";
+
         if ($.isEmptyObject(this.state.disneylandWait)) {
             return (
-                <LandsList park={"Tokyo Disneyland"} lands={Lands.disneylandLands} />
+                <section>
+                    <ParkHeader abrev={abrev} park={park} />
+                    <LandsList abrev={abrev} park={park} lands={Lands.disneylandLands} />
+                </section>
             )
         }
         return (
-            <AttractionList park={"Tokyo Disneyland"} abrev={"tdl"} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} />
+            <section>
+                <ParkHeader abrev={abrev} park={park} />
+                <AttractionList park={park} abrev={abrev} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} />
+            </section>
         );
 
     }

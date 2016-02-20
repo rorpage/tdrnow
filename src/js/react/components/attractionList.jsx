@@ -1,6 +1,5 @@
 import React      from  'react';
 import Attraction from '../components/attractionDetail.jsx';
-import ParkHeader from '../components/parkHeader.jsx';
 import { filter } from 'lodash';
 
 var AttractionList = React.createClass({
@@ -25,9 +24,7 @@ var AttractionList = React.createClass({
         });
 
         return (
-            <div>
-                <ParkHeader abrev={this.props.abrev} park={this.props.park} />
-                
+            <section className="attractions">                
                 {this.props.error}
 
                 {times.map((info) => {
@@ -38,13 +35,13 @@ var AttractionList = React.createClass({
 
                     return (
                         <div key={info.land}>
-                            <h4>{info.land}</h4>
+                            <h4 className={ "attractions__header " + this.props.abrev }>{info.land}</h4>
                             {attractions}
                         </div>
                     )
                 })}
 
-            </div>
+            </section>
         );
     }
 });

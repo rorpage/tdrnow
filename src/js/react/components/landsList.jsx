@@ -1,21 +1,17 @@
 import React from 'react';
 
 var LandsList = React.createClass({
-	render() {
-		return (
-			<div>
-				<h4>{this.props.park}</h4>
-
-				<ul key={this.props.park}>
-					{this.props.lands.map((lands) => {
-						return (
-							<li key={lands.id}>{lands.name}</li>
-						)
-					})}
-				</ul>
-			</div>
-		);
-	}
+    render() {
+        return (
+            <section className="attractions"> 
+                {this.props.lands.map((lands) => {
+                    return (
+                        <h4 className={ "attractions__header " + this.props.abrev } key={lands.id}>{lands.name}</h4>
+                    )
+                })}
+            </section>
+        );
+    }
 });
 
 module.exports = LandsList;

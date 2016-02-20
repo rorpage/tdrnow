@@ -8,11 +8,18 @@ $font-default: #fff;
 $border-color: #eee;
 
 $pink: rgba(222, 91, 107, 1);
+$pink-light: rgba(222, 91, 107, .5);
 $blue: rgba(73, 195, 211, 1);
+$blue-light: rgba(73, 195, 211, .5);
 $light-gray: rgb(216, 216, 216);
+$off-white: rgb(248, 248, 248);
+$white: rgb(255, 255, 255);
+$dark-gray: rgb(74, 74, 74);
 
 $tdl-base: $pink;
+$tdl-base-light: $pink-light;
 $tds-base: $blue;
+$tds-base-light: $blue-light;
 
 // Measurements
 $spacing: 1em;
