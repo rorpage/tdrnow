@@ -6,6 +6,7 @@ import AttractionList  from './attractionList.jsx';
 import Lands           from '../components/data/lands.js';
 import LandsList       from './landsList.jsx';
 import Error           from './utils/error.jsx';
+import Loading         from './utils/loading.jsx';
 import Utils           from '../../utils.js';
 
 var DisneylandWait = React.createClass({
@@ -66,7 +67,7 @@ var DisneylandWait = React.createClass({
             return (
                 <section>
                     <ParkHeader abrev={abrev} park={park} />
-                    <LandsList abrev={abrev} park={park} lands={Lands.disneylandLands} />
+                    <Loading abrev={abrev} />
                 </section>
             )
         }

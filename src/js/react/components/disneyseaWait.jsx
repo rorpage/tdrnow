@@ -6,6 +6,7 @@ import AttractionList  from './attractionList.jsx';
 import Lands           from '../components/data/lands.js';
 import LandsList       from './landsList.jsx';
 import Error           from './utils/error.jsx';
+import Loading         from './utils/loading.jsx';
 
 var DisneySeaWait = React.createClass({
     getInitialState() {
@@ -39,7 +40,7 @@ var DisneySeaWait = React.createClass({
             return (
                 <section>
                     <ParkHeader abrev={abrev} park={park} />
-                    <LandsList abrev={abrev} park={park} lands={Lands.disneySeaPorts} />
+                    <Loading abrev={abrev} />
                 </section>
             )
         }

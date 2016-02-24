@@ -73,13 +73,10 @@ h4 {
 }
 
 .main-content_button {
+  cursor: pointer;
   border-radius: 25px;
   text-align: center;
   padding: $spacing / 2;
-
-  // &:nth-child(even) {
-  //   margin-left: $spacing;
-  // }
 }
 
 .main-content_link {
@@ -109,6 +106,7 @@ main {
 .hours,
 .weather {
   align-items: center;
+  cursor: pointer;
   display: flex;
   margin-top: $spacing * 2;
   text-transform: uppercase;
@@ -177,6 +175,15 @@ main {
 .attractions {
   background: $off-white;
   padding: $spacing;
+  height: 100vh;
+}
+
+.attractions__loading {
+  text-align: center;
+}
+
+.attractions__loading-text {
+  color: $dark-gray;
 }
 
 .attraction {
