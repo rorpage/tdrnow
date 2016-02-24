@@ -34,7 +34,7 @@ var AttractionList = React.createClass({
                     }
 
                     return (
-                        <div key={info.land}>
+                        <div key={info.land} className="row large-uncollapse" data-equalizer>
                             <h4 className={ "attractions__header " + this.props.abrev }>{info.land}</h4>
                             {attractions}
                         </div>
