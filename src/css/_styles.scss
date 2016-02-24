@@ -178,6 +178,15 @@ main {
   height: 100vh;
 }
 
+
+.attractions__header {
+  border-radius: 30px;
+  margin: 0 auto;
+  text-align: center;
+  padding: $spacing / 4;
+  width: 60vw;
+}
+
 .attractions__loading {
   text-align: center;
 }
@@ -194,6 +203,10 @@ main {
   padding: $spacing / 2 $spacing;
 }
 
+.attraction__last {
+  margin-bottom: 0;
+}
+
 .attraction__header {
   color: $dark-gray;
 }
@@ -206,14 +219,6 @@ main {
 .attraction__detail-list-item {
   display: inline-block;
   width: 50%;
-}
-
-.attractions__header {
-  border-radius: 30px;
-  margin: 0 auto $spacing auto;
-  text-align: center;
-  padding: $spacing / 4;
-  width: 60vw;
 }
 
 .footer {

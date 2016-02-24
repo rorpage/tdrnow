@@ -30,13 +30,26 @@ var AttractionList = React.createClass({
                 {times.map((info) => {
                     var attractions = [];
                     for (var i = 0; i < info.attractions.length; i++) {
-                        attractions.push(<Attraction key={info.attractions[i].id} attraction={info.attractions[i]} />);
+                        
+                        let lastItem = false;
+                        if (i == (info.attractions.length - 1)) {
+                            console.log('last item!');
+                            lastItem = true;
+                        }   
+                        
+                        attractions.push(<Attraction key={info.attractions[i].id} attraction={info.attractions[i]} lastItem={lastItem}/>);
                     }
 
                     return (
-                        <div key={info.land} className="row large-uncollapse" data-equalizer>
-                            <h4 className={ "attractions__header " + this.props.abrev }>{info.land}</h4>
-                            {attractions}
+                        <div key={info.land}>
+                            <div className="row" data-equalizer>
+                                <div className="columns large-12">
+                                    <h4 className={ "attractions__header " + this.props.abrev }>{info.land}</h4>
+                                </div>
+                            </div>
+                            <div className="row large-uncollapse">
+                                {attractions}
+                            </div>
                         </div>
                     )
                 })}
