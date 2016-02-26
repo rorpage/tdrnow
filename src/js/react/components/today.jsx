@@ -32,10 +32,10 @@ var Today = React.createClass({
 
     render() {
 
-        let temperature = <h2 className="landing-header_h2">{this.state.weather.Temp}&#8457;</h2>;
+        let temperature = <h2 className="landing-header_h2 landing-header_temperature">{this.state.weather.Temp}&#8457;</h2>;
 
         if (this.state.showCelcius) {
-            temperature = <h2 className="landing-header_h2">{this.state.weather.TempCelsius}&#8451;</h2>;
+            temperature = <h2 className="landing-header_h2 landing-header_temperature">{this.state.weather.TempCelsius}&#8451;</h2>;
         }
 
         return (

@@ -8,6 +8,7 @@ import Hours           from '../components/hours.jsx';
 import DisneylandWait  from '../components/disneylandWait.jsx';
 import DisneySeaWait   from '../components/disneySeaWait.jsx';
 import ParkHeader      from '../components/parkHeader.jsx';
+import HoursAbbrev     from '../components/hours-abbrev.jsx';
 
 var LandingPage = React.createClass({
     render() {
@@ -24,6 +25,10 @@ var LandingPage = React.createClass({
                     <div className="row">
                         <ParkHeader abrev="tdl" park="Tokyo Disneyland" />
                         <ParkHeader abrev="tds" park="Tokyo DisneySea" />
+                    </div>
+                    <div className="row">
+                        <HoursAbbrev abbrev="tdl" />
+                        <HoursAbbrev abbrev="tds" />
                     </div>
                     <div className="row">
                         <div className="columns large-6">

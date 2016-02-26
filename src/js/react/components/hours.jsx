@@ -28,36 +28,12 @@ var Hours = React.createClass({
                 <h4>Error Occurred</h4>
             );
         }
-        if ($.isEmptyObject(this.state.hours)) {
-            return (
-                <div className="box hours">
-                    <h3><Link to="/hours">Todays Hours</Link></h3>
-                    <h4>Loading...</h4>
-                </div>
-            );
-        }
 
         return (
             <div className="hours">
                 <img className="icon hours__icon" src="/img/icon_clock@2x.png" />
                 <Link className="hours__header" to="/hours">Hours</Link>
             </div>
-            // <div className="box hours">
-            //     <h3><Link to="/hours">Todays Hours</Link></h3>
-
-            //     {this.state.hours.map((hour) => {
-            //         var parkName = Utilities.convertToParkName(hour.Abbreviation);
-
-            //         return (
-            //             <ul key={hour.Abbreviation.toLowerCase()}>
-            //                 <li className="title"><h5>{parkName}</h5></li>
-            //                 <li>Open {hour.HoursOfOperation}</li>
-            //                 <li>Passport Type: {hour.passport_type}</li>
-            //             </ul>
-            //         )
-            //     })}
-                
-            // </div>
         );
     }
 });

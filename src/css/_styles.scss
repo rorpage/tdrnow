@@ -66,6 +66,10 @@ h4 {
   color: $light-gray;
 }
 
+.landing-header_temperature {
+  cursor: pointer;
+}
+
 .main-content {
   height: 30vh;
   padding: $spacing;
@@ -85,6 +89,18 @@ h4 {
   &:hover {
     color: $font-default;
   }
+}
+
+.main-content__hours {
+  text-align: center;
+}
+
+.main-content__hours-tdl {
+  color: $tdl-base;
+}
+
+.main-content__hours-tds {
+  color: $tds-base;
 }
 
 main {

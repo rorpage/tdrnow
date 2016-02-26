@@ -28,14 +28,6 @@ var Weather = React.createClass({
                 <h4>Error Occurred</h4>
             )
         }
-        if ($.isEmptyObject(this.state.weather)) {
-            return (
-                <div className="box weather">
-                    <h3><Link to="/weather">Weather</Link></h3>
-                    <h4>Loading...</h4>
-                </div>
-            )
-        }
 
         return (
             <div className="weather">
