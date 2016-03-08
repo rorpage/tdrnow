@@ -31,8 +31,21 @@ var Hours = React.createClass({
 
         return (
             <div className="hours">
-                <img className="icon hours__icon" src="/img/icon_clock@2x.png" />
-                <Link className="hours__header" to="/hours">Hours</Link>
+                <div className="hours__container">
+                    <h2 className="hours__title"></h2>
+                    <h3 className="hours__tdl">Tokyo Disneyland</h3>
+                    <div className="hours__details-tdl">
+                        <h3 className="hours__details-header">Open</h3>
+                        <div className="hours__details-hours"></div>
+                        <div className="hours__details-passport">Passport Type: </div>
+                    </div>
+                    <h3 className="hours__tds">Tokyo DisneySea</h3>
+                    <div className="hours__details-tds">
+                        <h3 className="hours__details-header">Open</h3>
+                        <div className="hours__details-hours"></div>
+                        <div className="hours__details-passport">Passport Type: </div>
+                    </div>
+                </div>
             </div>
         );
     }
