@@ -2,7 +2,7 @@ import React           from 'react';
 import ReactDOM        from 'react-dom';
 import LandingPage     from '../components/landingPage.jsx';
 import Weather         from '../components/weather.jsx';
-import Hours           from '../components/hours.jsx';
+import Hours           from '../components/hoursDetail.jsx';
 import DisneylandWait  from '../components/disneylandWait.jsx';
 import DisneySeaWait   from '../components/disneySeaWait.jsx';
 
