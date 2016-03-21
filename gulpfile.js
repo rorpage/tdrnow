@@ -1,5 +1,6 @@
 var indexOutput     = 'index.html';
 var staticFolders   = ['src/img/*','src/fonts/*', 'src/js/vendor/*', 'src/index.html'];
+var favicon         = ['src/favicon/*'];
 
 var gulp        = require('gulp')
 var sass        = require('gulp-ruby-sass'); 
@@ -59,7 +60,8 @@ gulp.task('build', ['clean'], function() {
         'sass',
         'browserify',
         'js-vendor',
-        'copy-static-assets'
+        'copy-static-assets',
+        'copy-favicon'
     );
 });
 
@@ -138,6 +140,14 @@ gulp.task('js-vendor', function(){
  */
 gulp.task('copy-static-assets', function(){
     return gulp.src(staticFolders, { base: './src/' })
+           .pipe(gulp.dest('dist/'));
+});
+
+/**
+ * Copy over all the static assests such as images and fonts
+ */
+gulp.task('copy-favicon', function(){
+    return gulp.src(favicon, { base: './src/favicon/' })
            .pipe(gulp.dest('dist/'));
 });
 
