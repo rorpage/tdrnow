@@ -43,6 +43,7 @@ var Today = React.createClass({
         return (
             <div className="columns small-12 large-12 landing-header_weather" onClick={this.changeDegree}>
                 <h2 className="landing-header_h2">current temperature</h2>
+                {this.state.weather.Text}
                 {temperature}
             </div>
         )
