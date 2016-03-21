@@ -23,3 +23,8 @@
 @mixin dark-transparent-bg($transparency) {
 	background: rgba(37, 56, 78, $transparency);
 }
+
+@mixin loading-text($color, $opacity) {
+	color: $color;
+	opacity: $opacity;
+}

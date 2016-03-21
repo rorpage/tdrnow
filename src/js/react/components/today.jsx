@@ -34,6 +34,20 @@ var Today = React.createClass({
 
     render() {
 
+        if ($.isEmptyObject(this.state.weather)) {
+            return (
+                <div className="columns small-12 large-12 landing-header_weather" onClick={this.changeDegree}>
+                    <h2 className="landing-header_h2">current temperature</h2>
+                    <div className="landing-header_weather-loading">
+                        Magical
+                        <h2 className="landing-header_h2 landing-header_temperature">
+                            33&#8457;
+                        </h2>
+                    </div>
+                </div>
+            )
+        }
+
         let temperature = <h2 className="landing-header_h2 landing-header_temperature">{this.state.weather.Temp}&#8457;</h2>;
 
         if (this.state.showCelcius) {

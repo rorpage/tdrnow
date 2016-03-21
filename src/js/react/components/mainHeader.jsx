@@ -8,7 +8,7 @@ var MainHeader = React.createClass({
                 	<strong>TDR</strong>Now
                 </h1>
                 <h3 className="landing-header_h3">
-                	Wait times for Tokyo Disney Resort
+                	Tokyo Disney Resort Wait Times
                 </h3>
             </div>
         )

@@ -32,8 +32,11 @@ var HoursAbbrev = React.createClass({
         if ($.isEmptyObject(this.state.hours)) {
             return (
                 <div className="columns large-6 main-content__hours">
-                    <h4 className={ "main-content__hours-" + this.props.abbrev }>
-                        <i className="fa fa-clock-o"></i>
+                    <h4 className={ "main-content__hours-loading-" + this.props.abbrev }>
+                        <i className="fa fa-clock-o"></i> 8am to 10pm
+                    </h4>
+                    <h4 className={ "main-content__hours-loading-" + this.props.abbrev }>
+                        <i className="fa fa-ticket"></i> Passport: ★/●
                     </h4>
                 </div>
             )
