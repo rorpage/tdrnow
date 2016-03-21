@@ -4,6 +4,7 @@ import ResortActions from '../actions/resort-actions';
 class ResortStore {
     constructor() {
         this.hours = [];
+        this.favourites = [];
         this.weather = {};
         this.disneylandWait = {};
         this.disneySeaWait = {};
@@ -17,7 +18,8 @@ class ResortStore {
             handleUpdateWeather: ResortActions.UPDATE_WEATHER,
             handleUpdateDisneylandWait: ResortActions.UPDATE_DISNEYLAND_WAIT,
             handleUpdateDisneySeaWait: ResortActions.UPDATE_DISNEY_SEA_WAIT,
-            
+            handleAddFavourite: ResortActions.ADD_FAVOURITE,
+
             // TODO These are not firing - maybe altjs changed how this is handled?
             // http://alt.js.org/guide/async/
             handleFetchHours: ResortActions.FETCH_HOURS,
@@ -50,6 +52,10 @@ class ResortStore {
 
     handleUpdateDisneySeaWait(disneySeaWait) {
         this.disneySeaWait = disneySeaWait;
+    }
+
+    handleAddFavourite(id) {
+        this.favourites.push(id);
     }
 
     handleFetchHours() {

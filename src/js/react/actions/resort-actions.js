@@ -18,6 +18,10 @@ class ResortActions {
         return disneysea;
     }
 
+    addFavourite(id) {
+        return id;
+    }
+
     fetchHours() {
         return Api.fetchHours()
             .done((hours) => {

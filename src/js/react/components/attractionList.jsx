@@ -1,8 +1,28 @@
-import React      from  'react';
-import Attraction from '../components/attractionDetail.jsx';
-import { filter } from 'lodash';
+import React                from  'react';
+import ResortStore          from '../stores/resort-store';
+import Attraction           from '../components/attractionDetail.jsx';
+import FavouritesListToggle from '../components/AttractionsFavouriteListToggle.jsx';
+import { filter }           from 'lodash';
 
 var AttractionList = React.createClass({
+
+    getInitialState() {
+        return ResortStore.getState();
+    },
+
+    componentDidMount(){
+        ResortStore.listen(this.onChange);
+    },
+
+    componentWillUnmount(){
+        ResortStore.unlisten(this.onChange);
+    },
+
+    onChange(state) {
+        this.setState(state);
+        console.log(this.state.favourites);
+    },
+
     render() {
 
         var times = [];
@@ -24,7 +44,9 @@ var AttractionList = React.createClass({
         });
 
         return (
-            <section className="attractions">                
+            <section className="attractions">
+                <FavouritesListToggle /> 
+                
                 {this.props.error}
 
                 {times.map((info) => {
