@@ -1,5 +1,6 @@
 import React           from 'react';
 import ResortStore     from '../stores/resort-store';
+import ResortActions   from '../actions/resort-actions';
 
 var Today = React.createClass({
 
@@ -9,6 +10,7 @@ var Today = React.createClass({
 
     componentDidMount(){
         ResortStore.listen(this.onChange);
+        ResortActions.fetchWeather();
     },
 
     componentWillUnmount(){

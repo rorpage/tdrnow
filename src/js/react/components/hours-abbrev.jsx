@@ -11,6 +11,7 @@ var HoursAbbrev = React.createClass({
 
     componentDidMount(){
         ResortStore.listen(this.onChange);
+        ResortActions.fetchHours();
     },
 
     componentWillUnmount(){
@@ -32,7 +33,7 @@ var HoursAbbrev = React.createClass({
             return (
                 <div className="columns large-6 main-content__hours">
                     <h4 className={ "main-content__hours-" + this.props.abbrev }>
-                        <i class="fa fa-clock-o"></i>
+                        <i className="fa fa-clock-o"></i>
                     </h4>
                 </div>
             )
@@ -40,7 +41,12 @@ var HoursAbbrev = React.createClass({
         let hours = _.find(this.state.hours, { Abbreviation: this.props.abbrev.toUpperCase() });
         return (
             <div className="columns large-6 main-content__hours">
-                <h4 className={ "main-content__hours-" + this.props.abbrev }>{hours.HoursOfOperation}</h4>
+                <h4 className={ "main-content__hours-" + this.props.abbrev }>
+                    <i className="fa fa-clock-o"></i> {hours.HoursOfOperation}
+                </h4>
+                <h4 className={ "main-content__hours-" + this.props.abbrev }>
+                    <i className="fa fa-ticket"></i> Passport: {hours.passport_type}
+                </h4>
             </div>
         );
     }

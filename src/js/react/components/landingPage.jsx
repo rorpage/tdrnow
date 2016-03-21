@@ -10,6 +10,16 @@ import DisneySeaWait   from '../components/disneySeaWait.jsx';
 import ParkHeader      from '../components/parkHeader.jsx';
 import HoursAbbrev     from '../components/hours-abbrev.jsx';
 
+// Might be added in at some point
+// <div className="row">
+//     <div className="columns large-6">
+//         <Weather />
+//     </div>
+//     <div className="columns large-6">
+//         <Hours />
+//     </div>
+// </div>
+
 var LandingPage = React.createClass({
     render() {
         return (
@@ -29,14 +39,6 @@ var LandingPage = React.createClass({
                     <div className="row">
                         <HoursAbbrev abbrev="tdl" />
                         <HoursAbbrev abbrev="tds" />
-                    </div>
-                    <div className="row">
-                        <div className="columns large-6">
-                            <Weather />
-                        </div>
-                        <div className="columns large-6">
-                            <Hours />
-                        </div>
                     </div>
                 </main>
                 <MainFooter />
