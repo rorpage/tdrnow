@@ -23,7 +23,7 @@ import HoursAbbrev     from '../components/hours-abbrev.jsx';
 var LandingPage = React.createClass({
     render() {
         return (
-            <div>
+            <div className="landing">
                 <header className="landing-header">
                     <div className="row">
                         <MainHeader />

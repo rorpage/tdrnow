@@ -29,9 +29,13 @@ h4 {
 }
 
 .content {
-  background: linear-gradient(rgba(20, 51, 100, 0.4), rgba(20, 51, 100, 0.4)), url('../img/hero.jpg');
-  background-size: cover;
   height: 100vh;
+}
+
+.landing {
+  background: linear-gradient(rgba(20, 51, 100, 0.4), rgba(20, 51, 100, 0.4)), url('../img/main-bg@3x.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .inner {
@@ -161,11 +165,15 @@ main {
 }
 
 .park-header__tdl {
-  background-color: $tdl-base-light;
+  background: linear-gradient($tdl-base-light, $tdl-base-light), url('../img/tdl-header-bg@3x.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .park-header__tds {
-  background-color: $tds-base-light;
+  background: linear-gradient($tds-base-light, $tds-base-light), url('../img/tds-header-bg@3x.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 // http://lawrencenaman.com/css/responsive-slanted-divs-with-css/
