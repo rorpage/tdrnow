@@ -21,24 +21,28 @@ var DisneylandWait = React.createClass({
         let cachedWait = localStorage.getItem('tdl');
         let cachedTimestamp = localStorage.getItem('cacheTimeStamp');
         let cacheInvalid = false;
+        let noCachedTimeStamp = false;
 
-        if (cachedTimestamp) {
-            let currentTime = moment();
-            console.log('time difference:');
-            let timeDifference = currentTime.diff(moment($.parseJSON(cachedTimestamp)), 'minutes');
-
-            if (timeDifference > 5) {
-                cacheInvalid = true;
-                console.log('cache is invalid');
-            } else {
-                console.log('cache is STILL valid');
-            }
+        if (cachedTimestamp == null) {
+            cachedTimestamp = moment();
+            noCachedTimeStamp = true;
         }
 
-        if (cachedWait && !cacheInvalid) {
-            this.setState({disneylandWait: $.parseJSON(cachedWait)});
+        let currentTime = moment();
+        let timeDifference = currentTime.diff(moment($.parseJSON(cachedTimestamp)), 'minutes');
+        console.log('time difference: ' + timeDifference);
+
+        if (timeDifference > 5 || noCachedTimeStamp) {
+            cacheInvalid = true;
+            console.log('cache is invalid');
         } else {
+            console.log('cache is STILL valid');
+        }
+
+        if (cacheInvalid) {
             ResortActions.fetchDisneylandWait({}, 1);
+        } else {
+            this.setState({disneylandWait: $.parseJSON(cachedWait)});
         }
     },
 

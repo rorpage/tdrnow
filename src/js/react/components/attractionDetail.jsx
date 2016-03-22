@@ -1,12 +1,30 @@
 import React           from 'react';
 import ResortActions   from '../actions/resort-actions';
+import _               from 'lodash';
 
 var AttractionDetail = React.createClass({
 
     favouriteAttraction(e) {
         let $element = $(e.target);
         $element.toggleClass('favourite-button--active');
-        ResortActions.addFavourite($element.data('attractionid'));
+
+        let favouritesList = JSON.parse(localStorage.getItem('tdl-favourites'));
+        if (favouritesList == null) {
+            favouritesList = [];
+        }
+
+        let attractionId = $element.data('attractionid');
+
+        if ($.inArray(attractionId, favouritesList) === 0) {
+            favouritesList = _.remove(favouritesList, function(n) {
+                return n != attractionId;
+            });
+        } else {
+            favouritesList.push(attractionId);
+        }
+        
+        localStorage.setItem('tdl-favourites', JSON.stringify(favouritesList));
+        // ResortActions.updateFavourites(favouritesList);
     },
 
     render() {

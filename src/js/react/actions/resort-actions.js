@@ -18,8 +18,8 @@ class ResortActions {
         return disneysea;
     }
 
-    addFavourite(id) {
-        return id;
+    updateFavourites(favourites) {
+        return favourites;
     }
 
     fetchHours() {
