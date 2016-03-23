@@ -16,6 +16,7 @@ var DisneySeaWait = React.createClass({
     componentDidMount() {
         ResortStore.listen(this.onChange);
         ResortActions.fetchDisneySeaWait({}, 2);
+        ResortActions.fetchUserFavourites('tdrnow-favourite-attractions');
     },
 
     componentWillUnmount() {
@@ -48,7 +49,7 @@ var DisneySeaWait = React.createClass({
         return (
             <section>
                 <ParkHeader abrev={abrev} park={park} />
-                <AttractionList park={"Tokyo DisneySea"}  abrev={"tds"} error={error} times={this.state.disneySeaWait} lands={Lands.disneySeaPorts} />
+                <AttractionList park={"Tokyo DisneySea"}  abrev={"tds"} error={error} times={this.state.disneySeaWait} lands={Lands.disneySeaPorts} favourites={this.state.favourites}/>
             </section>
         );
 

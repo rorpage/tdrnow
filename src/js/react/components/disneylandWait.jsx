@@ -16,34 +16,38 @@ var DisneylandWait = React.createClass({
 
     componentDidMount() {
         ResortStore.listen(this.onChange);
+        ResortActions.fetchDisneylandWait({}, 1);
+        ResortActions.fetchUserFavourites('tdrnow-favourite-attractions');
 
+
+        // TODO This breaks when a user presses the favourite buttons
         // Added cache invalidation. But this needs serious work. This is the first iteration just to get it working
-        let cachedWait = localStorage.getItem('tdl');
-        let cachedTimestamp = localStorage.getItem('cacheTimeStamp');
-        let cacheInvalid = false;
-        let noCachedTimeStamp = false;
+        // let cachedWait = localStorage.getItem('tdl');
+        // let cachedTimestamp = localStorage.getItem('cacheTimeStamp');
+        // let cacheInvalid = false;
+        // let noCachedTimeStamp = false;
 
-        if (cachedTimestamp == null) {
-            cachedTimestamp = moment();
-            noCachedTimeStamp = true;
-        }
+        // if (cachedTimestamp == null) {
+        //     cachedTimestamp = moment();
+        //     noCachedTimeStamp = true;
+        // }
 
-        let currentTime = moment();
-        let timeDifference = currentTime.diff(moment($.parseJSON(cachedTimestamp)), 'minutes');
-        console.log('time difference: ' + timeDifference);
+        // let currentTime = moment();
+        // let timeDifference = currentTime.diff(moment($.parseJSON(cachedTimestamp)), 'minutes');
+        // console.log('time difference: ' + timeDifference);
 
-        if (timeDifference > 5 || noCachedTimeStamp) {
-            cacheInvalid = true;
-            console.log('cache is invalid');
-        } else {
-            console.log('cache is STILL valid');
-        }
+        // if (timeDifference > 5 || noCachedTimeStamp) {
+        //     cacheInvalid = true;
+        //     console.log('cache is invalid');
+        // } else {
+        //     console.log('cache is STILL valid');
+        // }
 
-        if (cacheInvalid) {
-            ResortActions.fetchDisneylandWait({}, 1);
-        } else {
-            this.setState({disneylandWait: $.parseJSON(cachedWait)});
-        }
+        // if (cacheInvalid) {
+        //     ResortActions.fetchDisneylandWait({}, 1);
+        // } else {
+        //     this.setState({disneylandWait: $.parseJSON(cachedWait)});
+        // }
     },
 
     componentWillUnmount() {
@@ -78,7 +82,7 @@ var DisneylandWait = React.createClass({
         return (
             <section>
                 <ParkHeader abrev={abrev} park={park} />
-                <AttractionList park={park} abrev={abrev} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} />
+                <AttractionList park={park} abrev={abrev} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} favourites={this.state.favourites} />
             </section>
         );
 

@@ -1,30 +1,46 @@
 import React           from 'react';
+import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
 import _               from 'lodash';
 
 var AttractionDetail = React.createClass({
 
+    getInitialState() {
+        return ResortStore.getState();
+    },
+
+    componentDidMount(){
+        ResortStore.listen(this.onChange);
+    },
+
+    componentWillUnmount(){
+        ResortStore.unlisten(this.onChange);
+    },
+
+    onChange(state) {
+        localStorage.setItem('tdrnow-favourite-attractions', JSON.stringify(state.favourites));
+        this.setState(state);
+    },
+
     favouriteAttraction(e) {
         let $element = $(e.target);
         $element.toggleClass('favourite-button--active');
 
-        let favouritesList = JSON.parse(localStorage.getItem('tdl-favourites'));
+        let favouritesList = JSON.parse(localStorage.getItem('tdrnow-favourite-attractions'));
         if (favouritesList == null) {
             favouritesList = [];
         }
 
         let attractionId = $element.data('attractionid');
 
-        if ($.inArray(attractionId, favouritesList) === 0) {
+        if (_.indexOf(favouritesList, attractionId) != -1) {
             favouritesList = _.remove(favouritesList, function(n) {
                 return n != attractionId;
             });
         } else {
             favouritesList.push(attractionId);
         }
-        
-        localStorage.setItem('tdl-favourites', JSON.stringify(favouritesList));
-        // ResortActions.updateFavourites(favouritesList);
+        ResortActions.updateFavourites(favouritesList);
     },
 
     render() {
@@ -34,10 +50,15 @@ var AttractionDetail = React.createClass({
             lastItemClass = "attraction__last";
         }
 
+        let userFavourite = "";
+        if (_.indexOf(this.props.favourites, parseInt(this.props.attraction.id, 10)) != -1) {
+            userFavourite = "favourite-button--active";
+        }
+
         return (
             <div className="columns small-12 medium-12 large-6">
                 <div className={ "attraction " + lastItemClass}>
-                    <i className="fa fa-heart favourite-button favourite-button--small" onClick={this.favouriteAttraction} data-attractionid={this.props.attraction.id}></i>
+                    <i className={"fa fa-heart favourite-button favourite-button--small " + userFavourite} onClick={this.favouriteAttraction} data-attractionid={this.props.attraction.id}></i>
                     <h4 className="attraction__header">{this.props.attraction.name}</h4>
                     <ul className="attraction__detail-list">
                         <li className="attraction__detail-list-item">Wait Time: {this.props.attraction.waitTime.postedWaitMinutes}</li>

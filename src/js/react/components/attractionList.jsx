@@ -20,7 +20,6 @@ var AttractionList = React.createClass({
 
     onChange(state) {
         this.setState(state);
-        console.log(this.state.favourites);
     },
 
     render() {
@@ -45,7 +44,7 @@ var AttractionList = React.createClass({
 
         return (
             <section className="attractions">
-                <FavouritesListToggle /> 
+                <FavouritesListToggle />
                 
                 {this.props.error}
 
@@ -58,8 +57,7 @@ var AttractionList = React.createClass({
                             console.log('last item!');
                             lastItem = true;
                         }   
-                        
-                        attractions.push(<Attraction key={info.attractions[i].id} attraction={info.attractions[i]} lastItem={lastItem}/>);
+                        attractions.push(<Attraction key={info.attractions[i].id} attraction={info.attractions[i]} lastItem={lastItem} favourites={this.props.favourites}/>);
                     }
 
                     return (

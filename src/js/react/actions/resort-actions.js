@@ -62,6 +62,14 @@ class ResortActions {
             });
     }
 
+    fetchUserFavourites(key) {
+        let favourites = JSON.parse(localStorage.getItem(key));
+        if (favourites == null) {
+            favourites = [];
+        }
+        return this.updateFavourites(favourites);
+    }
+
     hoursFailed(errorMessage) {
         return errorMessage;
     }
