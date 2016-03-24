@@ -3,6 +3,7 @@ import ResortStore     from '../stores/resort-store';
 import ResortActions   from '../actions/resort-actions';
 import ParkHeader      from '../components/parkHeaderLarge.jsx';
 import AttractionList  from './attractionList.jsx';
+import FavoutiesList   from './favouritesList.jsx';
 import Lands           from '../components/data/lands.js';
 import LandsList       from './landsList.jsx';
 import Error           from './utils/error.jsx';
@@ -82,6 +83,7 @@ var DisneylandWait = React.createClass({
         return (
             <section>
                 <ParkHeader abrev={abrev} park={park} />
+                <FavoutiesList waittimes={this.state.disneylandWait} favourites={this.state.favourites} />
                 <AttractionList park={park} abrev={abrev} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} favourites={this.state.favourites} />
             </section>
         );
