@@ -29,6 +29,7 @@ h4 {
 }
 
 .content {
+  background: $off-white;
   height: 100vh;
 }
 
@@ -205,39 +206,45 @@ main {
     -webkit-backface-visibility: hidden;
 }
 
-.attractions {
-  background: $off-white;
-  padding: $spacing;
-  height: 100vh;
-  position: relative;
-}
-
-
-.favourite-button {
+.favourite__button {
   background-color: $inactive;
   color: $white;
   border-radius: 25px;
   top: .7em;
   right: .5em;
-  padding: .5em;
+  padding: .6em;
   position: absolute;
 }
 
-.favourite-button--top {
+.favourite__button--noposition {
+  margin: 0 .5em;
+  top: 0;
+  right: 0;
+  position: relative;
+}
+
+.favourite__button--top {
   top: 0;
   right: $spacing;
   margin-top: -($spacing);
 }
 
-.favourite-button--active {
+.favourite__button--active {
   background-color: $favourite-button;
 }
 
-.favourite-button--small {
+.favourite__button--small {
   font-size: .7em;
 }
 
+.attractions {
+  background: $off-white;
+  padding: $spacing;
+  position: relative;
+}
+
 .attractions__header {
+  background-color: $favourite-base;
   border-radius: 30px;
   margin: 0 auto;
   text-align: center;
@@ -245,12 +252,25 @@ main {
   width: 60vw;
 }
 
+.attractions__header--tdl {
+  background-color: $tdl-base;
+}
+
+.attractions__header--tds {
+  background-color: $tds-base; 
+}
+
 .attractions__loading {
   text-align: center;
 }
 
-.attractions__loading-text {
+.attractions__loading-text,
+.attractions__text {
   color: $dark-gray;
+}
+
+.attractions__text {
+  text-align: center;
 }
 
 .attraction {

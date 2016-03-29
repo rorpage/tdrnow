@@ -83,7 +83,6 @@ var DisneylandWait = React.createClass({
         return (
             <section>
                 <ParkHeader abrev={abrev} park={park} />
-                <FavoutiesList waittimes={this.state.disneylandWait} favourites={this.state.favourites} />
                 <AttractionList park={park} abrev={abrev} error={error} times={this.state.disneylandWait} lands={Lands.disneylandLands} favourites={this.state.favourites} />
             </section>
         );

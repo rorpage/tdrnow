@@ -1,6 +1,7 @@
 import React                from  'react';
 import ResortStore          from '../stores/resort-store';
 import Attraction           from '../components/attractionDetail.jsx';
+import FavoutiesList        from './favouritesList.jsx';
 import FavouritesListToggle from '../components/AttractionsFavouriteListToggle.jsx';
 import { filter }           from 'lodash';
 
@@ -42,9 +43,17 @@ var AttractionList = React.createClass({
             times.push(area);
         });
 
+        let showFavourites = 'hide';
+        let showWaitTimes = 'show';
+        if (this.state.showFavourites) {
+            showFavourites = 'show';
+            showWaitTimes = 'hide';
+        }
+
         return (
             <section className="attractions">
                 <FavouritesListToggle />
+                <FavoutiesList waittimes={this.props.times} favourites={this.props.favourites} show={showFavourites}/>
                 
                 {this.props.error}
 
@@ -61,10 +70,10 @@ var AttractionList = React.createClass({
                     }
 
                     return (
-                        <div key={info.land}>
+                        <div key={info.land} className={showWaitTimes}>
                             <div className="row" data-equalizer>
                                 <div className="columns large-12">
-                                    <h4 className={ "attractions__header " + this.props.abrev }>{info.land}</h4>
+                                    <h4 className={ "attractions__header attractions__header--" + this.props.abrev }>{info.land}</h4>
                                 </div>
                             </div>
                             <div className="row large-uncollapse">

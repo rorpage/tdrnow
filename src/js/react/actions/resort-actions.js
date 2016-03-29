@@ -70,6 +70,10 @@ class ResortActions {
         return this.updateFavourites(favourites);
     }
 
+    showFavourites(show) {
+        return show;
+    }
+
     hoursFailed(errorMessage) {
         return errorMessage;
     }

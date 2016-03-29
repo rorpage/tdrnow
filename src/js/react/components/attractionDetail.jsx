@@ -24,7 +24,7 @@ var AttractionDetail = React.createClass({
 
     favouriteAttraction(e) {
         let $element = $(e.target);
-        $element.toggleClass('favourite-button--active');
+        $element.toggleClass('favourite__button--active');
 
         let favouritesList = JSON.parse(localStorage.getItem('tdrnow-favourite-attractions'));
         if (favouritesList == null) {
@@ -52,13 +52,13 @@ var AttractionDetail = React.createClass({
 
         let userFavourite = "";
         if (_.indexOf(this.props.favourites, parseInt(this.props.attraction.id, 10)) != -1) {
-            userFavourite = "favourite-button--active";
+            userFavourite = "favourite__button--active";
         }
 
         return (
             <div className="columns small-12 medium-12 large-6">
                 <div className={ "attraction " + lastItemClass}>
-                    <i className={"fa fa-heart favourite-button favourite-button--small " + userFavourite} onClick={this.favouriteAttraction} data-attractionid={this.props.attraction.id}></i>
+                    <i className={"fa fa-heart favourite__button favourite__button--small " + userFavourite + " " + this.props.hideFavouriteButton} onClick={this.favouriteAttraction} data-attractionid={this.props.attraction.id}></i>
                     <h4 className="attraction__header">{this.props.attraction.name}</h4>
                     <ul className="attraction__detail-list">
                         <li className="attraction__detail-list-item">Wait Time: {this.props.attraction.waitTime.postedWaitMinutes}</li>
