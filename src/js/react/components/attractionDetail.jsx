@@ -62,9 +62,9 @@ var AttractionDetail = React.createClass({
                     <h4 className="attraction__header">{this.props.attraction.name}</h4>
                     <ul className="attraction__detail-list">
                         <li className="attraction__detail-list-item">Wait Time: {this.props.attraction.waitTime.postedWaitMinutes}</li>
-                        <li className="attraction__detail-list-item">FastPass: {this.props.attraction.waitTime.fastPass}</li>
+                        <li className="attraction__detail-list-item">FP: {this.props.attraction.waitTime.fastPass}</li>
                         <li className="attraction__detail-list-item">Single Rider: {this.props.attraction.waitTime.singleRider}</li>
-                        <li className="attraction__detail-list-item">FastPass Return: {this.props.attraction.waitTime.fastPass}</li>
+                        <li className="attraction__detail-list-item">FP Return: {this.props.attraction.waitTime.fastPass}</li>
                     </ul>
                 </div>
             </div>

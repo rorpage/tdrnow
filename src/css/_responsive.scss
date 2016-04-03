@@ -1,0 +1,19 @@
+// http://stackoverflow.com/a/12848217/1052068
+// iPhone 5S/5C
+@media screen and (device-aspect-ratio: 40/71) {
+  .attractions__header {
+    width: 100%;
+  }
+
+  .attractions {
+    padding: 2em .5em;
+  }
+
+  .main-content_button {
+    font-size: .8em;
+  }
+
+  .main-content__hours h4 {
+    font-size: 1em;
+  }
+}
