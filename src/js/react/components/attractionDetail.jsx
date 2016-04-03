@@ -55,13 +55,18 @@ var AttractionDetail = React.createClass({
             userFavourite = "favourite__button--active";
         }
 
+        let waitTime = this.props.attraction.waitTime.postedWaitMinutes;
+        if (this.props.attraction.waitTime.display.toLowerCase() === "closed") {
+            waitTime = "Closed";
+        }
+
         return (
             <div className="columns small-12 medium-12 large-6">
                 <div className={ "attraction " + lastItemClass}>
                     <i className={"fa fa-heart favourite__button favourite__button--small " + userFavourite + " " + this.props.hideFavouriteButton} onClick={this.favouriteAttraction} data-attractionid={this.props.attraction.id}></i>
                     <h4 className="attraction__header">{this.props.attraction.name}</h4>
                     <ul className="attraction__detail-list">
-                        <li className="attraction__detail-list-item">Wait Time: {this.props.attraction.waitTime.postedWaitMinutes}</li>
+                        <li className="attraction__detail-list-item">Wait Time: {waitTime}</li>
                         <li className="attraction__detail-list-item">FP: {this.props.attraction.waitTime.fastPass}</li>
                         <li className="attraction__detail-list-item">Single Rider: {this.props.attraction.waitTime.singleRider}</li>
                         <li className="attraction__detail-list-item">FP Return: {this.props.attraction.waitTime.fastPass}</li>
