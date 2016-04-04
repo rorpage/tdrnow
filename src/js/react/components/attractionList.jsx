@@ -1,5 +1,6 @@
 import React                from  'react';
 import ResortStore          from '../stores/resort-store';
+import ResortActions        from '../actions/resort-actions';
 import Attraction           from '../components/attractionDetail.jsx';
 import FavoutiesList        from './favouritesList.jsx';
 import FavouritesListToggle from '../components/AttractionsFavouriteListToggle.jsx';
@@ -11,11 +12,17 @@ var AttractionList = React.createClass({
         return ResortStore.getState();
     },
 
-    componentDidMount(){
+    componentDidMount() {
         ResortStore.listen(this.onChange);
     },
 
-    componentWillUnmount(){
+    componentWillUnmount() {
+        /* 
+         * Hide favourites so if the user goes to the other park
+         * the favourites are hidden and we do not end up in weird
+         * state of favourites showing when they shouldn't be
+         */
+        ResortActions.showFavourites(false);
         ResortStore.unlisten(this.onChange);
     },
 
