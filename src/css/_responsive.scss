@@ -18,3 +18,11 @@
     font-size: 1em;
   }
 }
+
+@media only screen and (orientation: landscape) {
+  .landing-header,
+  .main-content,
+  .footer {
+    height: auto;
+  }
+}
